@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:viaponto_oficial/screens/inicial/components/inicial_tile.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class PerfilScreen extends StatelessWidget {
@@ -120,7 +121,30 @@ class PerfilScreen extends StatelessWidget {
                   ],
                 )),
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 30,),
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
+          Container(
+            height: 40,
+            color: Colors.grey[200],
+            child: Center(
+                child: GestureDetector(
+                  onTap: (){
+                      userManagerStore.logout();
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) => InicialTile()));
+                  },
+                  child: Text('Sair', style: TextStyle(color: Colors.red, fontSize: 16),
+                  ),
+                ),
+            ),
+          ),
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
         ]
       ),
     );

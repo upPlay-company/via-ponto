@@ -4,10 +4,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
-import 'package:viaponto_oficial/screens/ponto/bater_ponto_screen.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 import 'components/active_ponto_day.dart';
+import 'components/bater_ponto_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => BaterPontoScreen()));
+                          MaterialPageRoute(builder: (_) => BaterPontoTile()));
                     },
                     backgroundColor: Theme
                         .of(context)

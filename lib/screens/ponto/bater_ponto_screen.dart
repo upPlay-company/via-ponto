@@ -8,13 +8,15 @@ import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/screens/base/base_screen.dart';
 import 'package:viaponto_oficial/store/bater_ponto_store.dart';
+import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class BaterPontoScreen extends StatefulWidget {
 
-  BaterPontoScreen({this.ponto});
+  BaterPontoScreen({this.ponto, this.myPontoStore});
 
   final BaterPonto ponto;
+  final MyPontoStore myPontoStore;
 
   @override
   _BaterPontoScreenState createState() => _BaterPontoScreenState(ponto);

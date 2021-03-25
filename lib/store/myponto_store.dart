@@ -1,3 +1,4 @@
+
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';

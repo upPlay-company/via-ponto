@@ -12,7 +12,7 @@ class BaterPontoRepository {
 
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
-  var formatTime = DateFormat("HH:mm:ss").format(DateTime.now());
+  var formatTime = DateFormat("HH:mm").format(DateTime.now());
 
 
   Future<void> save(BaterPonto ponto, MyPontoStore store) async {
@@ -20,8 +20,6 @@ class BaterPontoRepository {
     final parseUser = ParseUser(userManagerStore.user.userName, userManagerStore.user.password, userManagerStore.user.email)..set(keyUserId, userManagerStore.user.id);
 
     final PontoObject = ParseObject(keyPontoTable);
-
-    if(ponto != null) PontoObject.objectId = ponto.id;
 
     final parseAcl = ParseACL(owner: parseUser);
     parseAcl.setPublicReadAccess(allowed: true);
