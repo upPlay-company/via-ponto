@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:viaponto_oficial/screens/base/base_screen.dart';
 import 'package:viaponto_oficial/screens/inicial/inicial_screen.dart';
+import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 void main() async {

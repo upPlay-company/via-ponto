@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/repository/bater_ponto_repository.dart';
+import 'package:viaponto_oficial/store/myponto_store.dart';
 
 part 'bater_ponto_store.g.dart';
 
@@ -8,7 +9,19 @@ class BaterPontoStore = _BaterPontoStore with _$BaterPontoStore;
 
 abstract class _BaterPontoStore with Store {
 
-  BaterPonto ponto;
+  final MyPontoStore store = MyPontoStore();
+
+  _BaterPontoStore({this.ponto}){
+    quantity = ponto.quantity;
+  }
+
+  final BaterPonto ponto;
+
+  @observable
+  int quantity;
+
+  @computed
+  void setQuantity(int value) => quantity = value;
 
   @computed
   Function get sendPressed => _send;
@@ -24,11 +37,13 @@ abstract class _BaterPontoStore with Store {
 
   @action
   Future<void> _send() async {
-    loading = true;
-    await BaterPontoRepository().save(ponto);
-    savedAd = true;
-    loading = false;
 
+    ponto.quantity = quantity;
+
+    loading = true;
+      await BaterPontoRepository().save(ponto, store);
+      savedAd = true;
+    loading = false;
   }
 
 }

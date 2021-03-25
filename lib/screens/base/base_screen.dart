@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bmnav/bmnav.dart' as bmnav;
 import 'package:viaponto_oficial/screens/home/home_screen.dart';
 import 'package:viaponto_oficial/screens/perfil/perfil_screen.dart';
+import 'package:viaponto_oficial/screens/relatorio/relatorio_screen.dart';
 
 class BaseScreen extends StatefulWidget {
 
@@ -17,7 +18,7 @@ class _BaseScreenState extends State<BaseScreen> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);*/
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Container(color: Colors.grey,),
+    RelatorioScreen(),
     PerfilScreen()
   ];
 
