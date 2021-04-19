@@ -22,7 +22,7 @@ class BaterPonto {
   String id;
   String time;
   String localization;
-  int quantity = 1;
+  int quantity;
   String registro;
   Empresas empresas;
   User user;

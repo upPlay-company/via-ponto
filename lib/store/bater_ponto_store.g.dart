@@ -17,6 +17,21 @@ mixin _$BaterPontoStore on _BaterPontoStore, Store {
               name: '_BaterPontoStore.sendPressed'))
           .value;
 
+  final _$quantityAtom = Atom(name: '_BaterPontoStore.quantity');
+
+  @override
+  int get quantity {
+    _$quantityAtom.reportRead();
+    return super.quantity;
+  }
+
+  @override
+  set quantity(int value) {
+    _$quantityAtom.reportWrite(value, super.quantity, () {
+      super.quantity = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_BaterPontoStore.loading');
 
   @override
@@ -69,9 +84,24 @@ mixin _$BaterPontoStore on _BaterPontoStore, Store {
     return _$_sendAsyncAction.run(() => super._send());
   }
 
+  final _$_BaterPontoStoreActionController =
+      ActionController(name: '_BaterPontoStore');
+
+  @override
+  int setQuantity(int value) {
+    final _$actionInfo = _$_BaterPontoStoreActionController.startAction(
+        name: '_BaterPontoStore.setQuantity');
+    try {
+      return super.setQuantity(value);
+    } finally {
+      _$_BaterPontoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+quantity: ${quantity},
 loading: ${loading},
 error: ${error},
 savedAd: ${savedAd},

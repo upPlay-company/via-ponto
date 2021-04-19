@@ -52,7 +52,7 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
       int counter = store.ponto.quantity;
       counter++;
       print(counter);
-      store.setQuantity(store.increment());
+      store.setQuantity(counter);
       print(counter);
     }
   }

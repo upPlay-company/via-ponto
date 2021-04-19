@@ -75,19 +75,22 @@ class _HomeScreenState extends State<HomeScreen>
                 title: Center(
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            DateFormat("EEEE,", "pt_BR").format(date),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            DateFormat(" d 'de' MMMM 'de' y", "pt_BR")
-                                .format(date),
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              DateFormat("EEEE,", "pt_BR").format(date),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              DateFormat(" d 'de' MMMM 'de' y", "pt_BR")
+                                  .format(date),
+                              style: TextStyle(color: Colors.white),
+                              overflow: ,
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 20,

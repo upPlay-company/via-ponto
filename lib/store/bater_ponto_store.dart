@@ -17,10 +17,10 @@ abstract class _BaterPontoStore with Store {
   final BaterPonto ponto;
 
   @observable
-  int quantity = 1;
+  int quantity;
 
-  @computed
-  void setQuantity(int value) => quantity = value;
+  @action
+  int setQuantity(int value) => quantity = value;
 
   @computed
   Function get sendPressed => _send;
@@ -33,11 +33,6 @@ abstract class _BaterPontoStore with Store {
 
   @observable
   bool savedAd = false;
-
-  @action
-  int increment() {
-    return quantity++;
-  }
 
   @action
   Future<void> _send() async {
