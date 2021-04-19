@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:viaponto_oficial/screens/base/base_screen.dart';
 import 'package:viaponto_oficial/screens/inicial/inicial_screen.dart';
-import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 void main() async {
@@ -14,9 +13,9 @@ void main() async {
   runApp(MyApp());
 }
 
-  GetIt location = GetIt.instance;
+GetIt location = GetIt.instance;
 
-void setupLocation(){
+void setupLocation() {
   location.registerSingleton(UserManagerStore());
 }
 
@@ -31,7 +30,6 @@ Future<void> initializeParse() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,17 +44,13 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [const Locale('pt', 'BR')],
       initialRoute: 'inicial',
-      onGenerateRoute: (settings){
-        switch(settings.name){
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
           case '/base':
-            return MaterialPageRoute(
-              builder: (_) => BaseScreen()
-            );
+            return MaterialPageRoute(builder: (_) => BaseScreen());
           case '/inicial':
-            default:
-              return MaterialPageRoute(
-                builder: (_) => InicialScreen()
-            );
+          default:
+            return MaterialPageRoute(builder: (_) => InicialScreen());
         }
       },
     );

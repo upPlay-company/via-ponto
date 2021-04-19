@@ -10,10 +10,9 @@ class ActivePontoDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     DateTime date = DateTime.now();
 
-    if(date.day == ponto.created.day)
+    if (date.day == ponto.created.day)
       return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,16 +21,23 @@ class ActivePontoDay extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  Text(ponto.time, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(width: 30,),
-                  Text('${ponto.registro}', style: TextStyle(fontSize: 18),),
+                  Text(ponto.time,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    '${ponto.registro}',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ],
               ),
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.black.withAlpha(50)))
-              ),
+                  border: Border(
+                      bottom: BorderSide(color: Colors.black.withAlpha(50)))),
             )
           ],
         ),

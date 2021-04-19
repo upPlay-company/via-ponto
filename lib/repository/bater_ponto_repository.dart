@@ -9,15 +9,15 @@ import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class BaterPontoRepository {
-
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
   var formatTime = DateFormat("HH:mm").format(DateTime.now());
-
+  List<String> teste = ["08:00", "12:00", "14:00", "18:00"];
 
   Future<void> save(BaterPonto ponto, MyPontoStore store) async {
-
-    final parseUser = ParseUser(userManagerStore.user.userName, userManagerStore.user.password, userManagerStore.user.email)..set(keyUserId, userManagerStore.user.id);
+    final parseUser = ParseUser(userManagerStore.user.userName,
+        userManagerStore.user.password, userManagerStore.user.email)
+      ..set(keyUserId, userManagerStore.user.id);
 
     final PontoObject = ParseObject(keyPontoTable);
 
@@ -30,25 +30,31 @@ class BaterPontoRepository {
     PontoObject.set<String>(keyPontoHorario, formatTime);
     PontoObject.set<ParseUser>(keyPontoIdUser, parseUser);
 
-    if(ponto.quantity == 1) PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
-    if(ponto.quantity == 2) PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
-    if(ponto.quantity == 3) PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
-    if(ponto.quantity == 4) PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+    if (ponto.quantity == 1)
+      PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+    if (ponto.quantity == 2)
+      PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+    if (ponto.quantity == 3)
+      PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+    if (ponto.quantity == 4)
+      PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
 
     PontoObject.set<int>(keyPontoQuantity, ponto.quantity);
-    PontoObject.set<ParseObject>(keyPontoIdEmpresa,
-          ParseObject(keyEmpresaTable)..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
+    PontoObject.set<ParseObject>(
+        keyPontoIdEmpresa,
+        ParseObject(keyEmpresaTable)
+          ..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
 
     final response = await PontoObject.save();
 
-    if(!response.success){
+    if (!response.success) {
       return Future.error(ParseErrors.getDescription(response.error.code));
     }
-
   }
 
   Future<List<BaterPonto>> getMyPonto(User user) async {
-    final currentUser = ParseUser(user.userName, user.password, user.email)..set(keyUserId, user.id);
+    final currentUser = ParseUser(user.userName, user.password, user.email)
+      ..set(keyUserId, user.id);
     final queryBuilder = QueryBuilder<ParseObject>(ParseObject(keyPontoTable));
 
     queryBuilder.setLimit(100);

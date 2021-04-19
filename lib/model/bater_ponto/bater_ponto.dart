@@ -5,15 +5,15 @@ import 'package:viaponto_oficial/repository/table_keys.dart';
 import 'package:viaponto_oficial/repository/user_repository.dart';
 
 class BaterPonto {
-
-  BaterPonto.fromParse(ParseObject object){
+  BaterPonto.fromParse(ParseObject object) {
     id = object.objectId;
     time = object.get<String>(keyPontoHorario);
     localization = object.get<String>(keyPontoLocal);
     quantity = object.get<int>(keyPontoQuantity);
     registro = object.get<String>(keyPontoRegistro);
     empresas = Empresas.fromParse(object.get<ParseObject>(keyPontoIdEmpresa));
-    user = UserRepository().mapParseToUser(object.get<ParseUser>(keyPontoIdUser));
+    user =
+        UserRepository().mapParseToUser(object.get<ParseUser>(keyPontoIdUser));
     created = object.createdAt;
   }
 
@@ -22,7 +22,7 @@ class BaterPonto {
   String id;
   String time;
   String localization;
-  num quantity;
+  int quantity = 1;
   String registro;
   Empresas empresas;
   User user;

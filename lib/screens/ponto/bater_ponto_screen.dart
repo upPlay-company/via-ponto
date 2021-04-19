@@ -12,7 +12,6 @@ import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class BaterPontoScreen extends StatefulWidget {
-
   BaterPontoScreen({this.ponto, this.myPontoStore});
 
   final BaterPonto ponto;
@@ -23,7 +22,6 @@ class BaterPontoScreen extends StatefulWidget {
 }
 
 class _BaterPontoScreenState extends State<BaterPontoScreen> {
-
   _BaterPontoScreenState(BaterPonto ponto)
       : editing = ponto != null,
         store = BaterPontoStore(ponto: ponto ?? BaterPonto());
@@ -40,23 +38,25 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
   void initState() {
     super.initState();
     when((_) => store.savedAd, () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => BaseScreen()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => BaseScreen()));
     });
   }
 
-  void _incrementCounter(){
-    if(store.ponto.quantity == null){
+  void _incrementCounter() {
+    if (store.ponto.quantity == null) {
       int counter = 0;
       counter++;
       store.setQuantity(counter);
     } else {
       int counter = store.ponto.quantity;
       counter++;
-      store.setQuantity(counter);
+      print(counter);
+      store.setQuantity(store.increment());
+      print(counter);
     }
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,12 +67,11 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
           child: Card(
               elevation: 8,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30)
-              ),
+                  borderRadius: BorderRadius.circular(30)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Observer(builder: (_){
-                  if(store.loading)
+                child: Observer(builder: (_) {
+                  if (store.loading)
                     return Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -100,8 +99,9 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15),
-                          child: Text('PONTO DE ENTRADA E SAÍDA', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                          ),
+                          child: Text('PONTO DE ENTRADA E SAÍDA',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -115,7 +115,9 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
                                 padding: const EdgeInsets.only(
                                     top: 8, bottom: 8, left: 15, right: 8),
                                 child: TextFormField(
-                                  initialValue: DateFormat(" d 'de' MMMM 'de' y", "pt_BR").format(date),
+                                  initialValue:
+                                      DateFormat(" d 'de' MMMM 'de' y", "pt_BR")
+                                          .format(date),
                                   keyboardType: TextInputType.emailAddress,
                                   autocorrect: false,
                                   style: TextStyle(
@@ -150,16 +152,19 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
                                     children: [
                                       Icon(Icons.alarm),
                                       DigitalClock(
-                                        areaDecoration: BoxDecoration(color: Colors.transparent),
-                                        areaAligment: AlignmentDirectional.center,
+                                        areaDecoration: BoxDecoration(
+                                            color: Colors.transparent),
+                                        areaAligment:
+                                            AlignmentDirectional.center,
                                         hourMinuteDigitDecoration:
-                                        BoxDecoration(color: Colors.transparent),
-                                        secondDigitDecoration:
-                                        BoxDecoration(color: Colors.transparent),
-                                        hourMinuteDigitTextStyle:
-                                        TextStyle(fontSize: 16, color: Colors.black),
-                                        secondDigitTextStyle:
-                                        TextStyle(fontSize: 16, color: Colors.black),
+                                            BoxDecoration(
+                                                color: Colors.transparent),
+                                        secondDigitDecoration: BoxDecoration(
+                                            color: Colors.transparent),
+                                        hourMinuteDigitTextStyle: TextStyle(
+                                            fontSize: 16, color: Colors.black),
+                                        secondDigitTextStyle: TextStyle(
+                                            fontSize: 16, color: Colors.black),
                                       ),
                                     ],
                                   ),
@@ -207,28 +212,29 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
                                   style: TextStyle(color: Colors.red),
                                 ),
                               ),
-                                Observer(
-                                  builder: (_){
-                                    return TextButton(
-                                      onPressed: (){
-                                        _incrementCounter();
-                                        store.sendPressed();
-                                      },
-                                      child: Text(
-                                        'Enviar',
-                                        style: TextStyle(color: Theme.of(context).primaryColor),
-                                      ),
-                                    );
-                                  },
-                                )
+                              Observer(
+                                builder: (_) {
+                                  return TextButton(
+                                    onPressed: () {
+                                      _incrementCounter();
+                                      store.sendPressed();
+                                    },
+                                    child: Text(
+                                      'Enviar',
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    ),
+                                  );
+                                },
+                              )
                             ],
                           ),
                         )
                       ],
                     );
                 }),
-              )
-          ),
+              )),
         ),
       ),
     );
