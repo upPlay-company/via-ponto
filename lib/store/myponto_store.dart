@@ -21,11 +21,9 @@ abstract class _MyPontoStore with Store {
   Future<void> _getMyPonto() async {
     final user = GetIt.I<UserManagerStore>().user;
 
-    try {
-      loading = true;
-      allAds = await BaterPontoRepository().getMyPonto(user);
-      loading = false;
-    } catch (e) {}
+    loading = true;
+    allAds = await BaterPontoRepository().getMyPonto(user);
+    loading = false;
   }
 
   @observable
