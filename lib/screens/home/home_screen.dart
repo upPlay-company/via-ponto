@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
                               DateFormat(" d 'de' MMMM 'de' y", "pt_BR")
                                   .format(date),
                               style: TextStyle(color: Colors.white),
-                              overflow: ,
+                              overflow: TextOverflow.ellipsis,
                             )
                           ],
                         ),
