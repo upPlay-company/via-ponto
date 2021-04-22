@@ -11,44 +11,144 @@ import 'package:viaponto_oficial/store/user_manager_store.dart';
 class BaterPontoRepository {
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
-  var formatTime = DateFormat("HH:mm").format(DateTime.now());
-  List<String> teste = ["08:00", "12:00", "14:00", "18:00"];
+  String formatTimeBanco = DateFormat("HH:mm").format(DateTime.now());
+
+  String formatTime = DateFormat("HH:mm")
+      .format(DateTime.now())
+      .replaceAll(new RegExp(':'), '');
+
+  String semana = DateFormat("EEEE,", "pt_BR").format(DateTime.now());
+
+  String semanaEntrada1;
+  String semanaEntrada2;
+  String semanaSaida1;
+  String semanaSaida2;
+
+  String sabadoEntrada1;
+  String sabadoEntrada2;
+  String sabadoSaida1;
+  String sabadoSaida2;
+
+  String domingoEntrada1;
+  String domingoEntrada2;
+  String domingoSaida1;
+  String domingoSaida2;
 
   Future<void> save(BaterPonto ponto, MyPontoStore store) async {
-    final parseUser = ParseUser(userManagerStore.user.userName,
-        userManagerStore.user.password, userManagerStore.user.email)
-      ..set(keyUserId, userManagerStore.user.id);
+    try {
+      final parseUser = ParseUser(userManagerStore.user.userName,
+          userManagerStore.user.password, userManagerStore.user.email)
+        ..set(keyUserId, userManagerStore.user.id);
 
-    final PontoObject = ParseObject(keyPontoTable);
+      final PontoObject = ParseObject(keyPontoTable);
 
-    final parseAcl = ParseACL(owner: parseUser);
-    parseAcl.setPublicReadAccess(allowed: true);
-    parseAcl.setPublicWriteAccess(allowed: false);
-    PontoObject.setACL(parseAcl);
+      final parseAcl = ParseACL(owner: parseUser);
+      parseAcl.setPublicReadAccess(allowed: true);
+      parseAcl.setPublicWriteAccess(allowed: false);
+      PontoObject.setACL(parseAcl);
 
-    PontoObject.set<String>(keyPontoLocal, 'Rua Elias Gorayeb, 3091');
-    PontoObject.set<String>(keyPontoHorario, formatTime);
-    PontoObject.set<ParseUser>(keyPontoIdUser, parseUser);
+      PontoObject.set<String>(keyPontoLocal, 'Rua Elias Gorayeb, 3091');
+      PontoObject.set<String>(keyPontoHorario, formatTimeBanco);
+      PontoObject.set<ParseUser>(keyPontoIdUser, parseUser);
 
-    if (ponto.quantity == 1)
-      PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
-    if (ponto.quantity == 2)
-      PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
-    if (ponto.quantity == 3)
-      PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
-    if (ponto.quantity == 4)
-      PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+      int horaAtual = int.parse(formatTime);
 
-    PontoObject.set<int>(keyPontoQuantity, ponto.quantity);
-    PontoObject.set<ParseObject>(
-        keyPontoIdEmpresa,
-        ParseObject(keyEmpresaTable)
-          ..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
+      if (semana == 'sabado') {
+        // sabado
+        sabadoEntrada1 =
+            userManagerStore.user.sabadoEntrada1.replaceAll(
+                new RegExp(':'), '');
+        sabadoEntrada2 =
+            userManagerStore.user.sabadoEntrada2.replaceAll(
+                new RegExp(':'), '');
+        sabadoSaida1 =
+            userManagerStore.user.sabadoSaida1.replaceAll(new RegExp(':'), '');
+        sabadoSaida2 =
+            userManagerStore.user.sabadoSaida2.replaceAll(new RegExp(':'), '');
+        int sabadoentrada1 = int.parse(sabadoEntrada1);
+        int sabadoentrada2 = int.parse(sabadoEntrada2);
+        int sabadosaida1 = int.parse(sabadoSaida1);
+        int sabadosaida2 = int.parse(sabadoSaida2);
 
-    final response = await PontoObject.save();
+        if (horaAtual <= sabadoentrada1 ||
+            horaAtual >= sabadoentrada1 && horaAtual < sabadosaida1) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+        } else if (horaAtual >= sabadosaida1 && horaAtual < sabadoentrada2) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+        } else if (horaAtual >= sabadoentrada2 && horaAtual < sabadosaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+        } else if (horaAtual >= sabadosaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+        }
+      } else if (semana == 'domingo') {
+        // domingo
+        domingoEntrada1 =
+            userManagerStore.user.semanaEntrada1.replaceAll(
+                new RegExp(':'), '');
+        domingoEntrada2 =
+            userManagerStore.user.semanaEntrada2.replaceAll(
+                new RegExp(':'), '');
+        domingoSaida1 =
+            userManagerStore.user.semanaSaida1.replaceAll(new RegExp(':'), '');
+        domingoSaida2 =
+            userManagerStore.user.semanaSaida2.replaceAll(new RegExp(':'), '');
+        int domingoentrada1 = int.parse(domingoEntrada1);
+        int domingoentrada2 = int.parse(domingoEntrada2);
+        int domingosaida1 = int.parse(domingoSaida1);
+        int domingosaida2 = int.parse(domingoSaida2);
 
-    if (!response.success) {
-      return Future.error(ParseErrors.getDescription(response.error.code));
+        if (horaAtual <= domingoentrada1 ||
+            horaAtual >= domingoentrada1 && horaAtual < domingosaida1) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+        } else if (horaAtual >= domingosaida1 && horaAtual < domingoentrada2) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+        } else if (horaAtual >= domingoentrada2 && horaAtual < domingosaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+        } else if (horaAtual >= domingosaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+        }
+      } else {
+        // segunda a sexta
+        semanaEntrada1 =
+            userManagerStore.user.semanaEntrada1.replaceAll(
+                new RegExp(':'), '');
+        semanaEntrada2 =
+            userManagerStore.user.semanaEntrada2.replaceAll(
+                new RegExp(':'), '');
+        semanaSaida1 =
+            userManagerStore.user.semanaSaida1.replaceAll(new RegExp(':'), '');
+        semanaSaida2 =
+            userManagerStore.user.semanaSaida2.replaceAll(new RegExp(':'), '');
+        int horaentrada1 = int.parse(semanaEntrada1);
+        int horaentrada2 = int.parse(semanaEntrada2);
+        int horasaida1 = int.parse(semanaSaida1);
+        int horasaida2 = int.parse(semanaSaida2);
+
+        if (horaAtual <= horaentrada1 ||
+            horaAtual >= horaentrada1 && horaAtual < horasaida1) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+        } else if (horaAtual >= horasaida1 && horaAtual < horaentrada2) {
+          PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+        } else if (horaAtual >= horaentrada2 && horaAtual < horasaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+        } else if (horaAtual >= horasaida2) {
+          PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+        }
+      }
+
+      PontoObject.set<int>(keyPontoQuantity, ponto.quantity);
+      PontoObject.set<ParseObject>(
+          keyPontoIdEmpresa,
+          ParseObject(keyEmpresaTable)
+            ..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
+
+      final response = await PontoObject.save();
+
+      if (!response.success) {
+        return Future.error(ParseErrors.getDescription(response.error.code));
+      }
+    } catch (e) {
+      Future.error('Fora do horario definido');
     }
   }
 
@@ -72,3 +172,4 @@ class BaterPontoRepository {
     }
   }
 }
+

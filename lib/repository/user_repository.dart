@@ -66,6 +66,35 @@ class UserRepository {
     }
   }
 
+  Future<void> update(User user) async {
+    final ParseUser parseUser = await ParseUser.currentUser();
+
+    if (parseUser != null) {
+      parseUser.set<String>(keyUserName, user.name);
+      parseUser.set<String>(keyUserPhone, user.phone);
+
+      if (user.password != null) {
+        parseUser.password = user.password;
+      }
+
+      final response = await parseUser.update();
+
+      if (!response.success)
+        return Future.error(ParseErrors.getDescription(response.error.code));
+
+      if (user.password != null) {
+        await parseUser.logout();
+
+        final loginResponse =
+        await ParseUser(user.email, user.password, user.email).login();
+
+        if (!loginResponse.success)
+          return Future.error(ParseErrors.getDescription(response.error.code));
+      }
+    }
+  }
+
+
 
   User mapParseToUser(ParseUser parseUser) {
     return User(
@@ -80,6 +109,18 @@ class UserRepository {
       idEmpresa: Empresas.fromParse(parseUser.get(keyUserIdEmpresa)),
       nomeEmpresa: parseUser.get(keyUserNomeEmpresa),
       userName: parseUser.get(keyUserUserName),
+      semanaEntrada1: parseUser.get(keyUserHoraEntrada1),
+      semanaEntrada2: parseUser.get(keyUserHoraEntrada2),
+      semanaSaida1: parseUser.get(keyUserHoraSaida1),
+      semanaSaida2: parseUser.get(keyUserHoraSaida2),
+      sabadoEntrada1: parseUser.get(keyUserHoraSabadoEntrada1),
+      sabadoEntrada2: parseUser.get(keyUserHoraSabadoEntrada2),
+      sabadoSaida1: parseUser.get(keyUserHoraSabadoSaida1),
+      sabadoSaida2: parseUser.get(keyUserHoraSabadoSaida2),
+      domingoEntrada1: parseUser.get(keyUserHoraDomingoEntrada1),
+      domingoEntrada2: parseUser.get(keyUserHoraDomingoEntrada2),
+      domingoSaida1: parseUser.get(keyUserHoraDomingoSaida1),
+      domingoSaida2: parseUser.get(keyUserHoraDomingoSaida2),
       createdAt: parseUser.get(keyUserCreatedAt),
     );
   }

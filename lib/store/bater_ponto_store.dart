@@ -37,10 +37,13 @@ abstract class _BaterPontoStore with Store {
   @action
   Future<void> _send() async {
     ponto.quantity = quantity;
-
-    loading = true;
-    await BaterPontoRepository().save(ponto, store);
-    savedAd = true;
-    loading = false;
+    try {
+      loading = true;
+      await BaterPontoRepository().save(ponto, store);
+      savedAd = true;
+      loading = false;
+    } catch (e) {
+      error = e;
+    }
   }
 }

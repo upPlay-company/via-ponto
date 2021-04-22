@@ -1,3 +1,4 @@
+/*
 E/DartVM  ( 4469):   pc 0xa9db59b6 fp 0x7cf8f928 /system/lib/libc.so+0x709b6
 E/DartVM  ( 4469):   pc 0xa9d6550c fp 0x7cf8f958 /system/lib/libc.so+0x2050c
 E/DartVM  ( 4469): -- End of DumpStackTrace
@@ -40,36 +41,6 @@ backtrace:
     #24 pc 0002050b  /system/lib/libc.so (__start_thread+75)
     #25 pc 0001eda6  /system/lib/libc.so (__bionic_clone+70)
 Lost connection to device.
-Failed to send request: {"jsonrpc":"2.0","id":"766","method":"getMemoryUsage","params":{"isolateId":"isolates/834515595401699"}}
-VUNERABILIDADE DE FALSIFICAÇÃO
-lOCALIZAÇÃO FALSA
-lOGADO EM VARIOS DISPOSITIVO
-FOJANDO VALOR, PARA PAGAMENTO
-ESQUECE DE BATER OS PONTOS => SOLUÇÃO, APP NOTIFICAR, LEMBRANDO O USUARIO DE BATER O PONTO
-Descontar atraso das horas extras, caso não desconta das horas normais.
-verifica artigo do trabalhador em questão de tempo tolerância 
+Failed to send request: {"jsonrpc":"2.0","id":"766","method":"getMemoryUsage","params":{"isolateId":"isolates/834515595401699"}
 
-void main() {
-  String teste = "14:00";
-  teste = teste.replaceAll(new RegExp(':'),'');
-  int hora = int.parse(teste);
-  if(hora >= 0800 && hora < 1200){
-    int carga = hora - 0800;
-    print(carga);
-    int carga_horaria_total = 45;
-    carga_horaria_total -= carga;
-    print(carga_horaria_total);
-    print(carga_horaria_total * 6);
-      
-    print("primeira entrada");
-  }
-  else if(hora >= 1200 && hora < 1400){
-    print("primeira saida");
-  }
-  else if(hora >= 1400 && hora < 1800){
-    print("segunda entrada");
-  }
-  else if(hora == 1800){
-    print("segunda saida");
-  }
-}
+*/
