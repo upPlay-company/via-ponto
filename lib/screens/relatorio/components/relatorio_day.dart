@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:viaponto_oficial/screens/home/components/active_ponto_day.dart';
+import 'package:viaponto_oficial/store/myponto_store.dart';
 
 class RelatorioDay extends StatefulWidget {
   @override
@@ -6,11 +8,13 @@ class RelatorioDay extends StatefulWidget {
 }
 
 class _RelatorioDayState extends State<RelatorioDay> {
+  final MyPontoStore store = MyPontoStore();
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+            child: Column(
           children: [
             Container(
               color: Theme.of(context).primaryColor,
@@ -21,12 +25,13 @@ class _RelatorioDayState extends State<RelatorioDay> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                        onTap: (){},
-                        child: Icon(Icons.arrow_back_ios)),
-                    Text('dias', style: TextStyle(color: Colors.white),),
+                        onTap: () {}, child: Icon(Icons.arrow_back_ios)),
+                    Text(
+                      'dias',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     GestureDetector(
-                        onTap: (){},
-                        child: Icon(Icons.arrow_forward_ios))
+                        onTap: () {}, child: Icon(Icons.arrow_forward_ios))
                   ],
                 ),
               ),
@@ -60,8 +65,16 @@ class _RelatorioDayState extends State<RelatorioDay> {
               ),
             )
           ],
+        )),
+        SliverToBoxAdapter(
+          child: ListView.builder(
+            itemCount: store.allAds.length,
+            itemBuilder: (_, index) {
+              return ActivePontoDay(store.allAds[index], store);
+            },
+          ),
         )
-      ]
+      ],
     );
   }
 }
