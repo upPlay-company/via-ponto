@@ -103,9 +103,10 @@ class PerfilScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // TODO: ESPECIFICA HORARIO BANCO
                     Text('Segunda à sexta:', style: TextStyle(fontSize: 18, color: Colors.black),),
-                    Text('08:00 as 12:00 / 14:00 as 18:00', style: TextStyle(fontSize: 18, color: primary),),
+                    Text('${userManagerStore.user.semanaEntrada1} as ${userManagerStore.user.semanaSaida1} / '
+                        '${userManagerStore.user.semanaEntrada2} as ${userManagerStore.user.semanaSaida2}',
+                      style: TextStyle(fontSize: 18, color: primary),),
                   ],
                 )),
           ),
@@ -115,9 +116,8 @@ class PerfilScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // TODO: ESPECIFICA HORARIO BANCO
                     Text('Sábado:', style: TextStyle(fontSize: 18, color: Colors.black),),
-                    Text('08:00 as 13:00', style: TextStyle(fontSize: 18, color: primary),),
+                    Text('${userManagerStore.user.sabadoEntrada1} as ${userManagerStore.user.sabadoSaida1}', style: TextStyle(fontSize: 18, color: primary),),
                   ],
                 )),
           ),
@@ -145,6 +145,7 @@ class PerfilScreen extends StatelessWidget {
             height: 0.5,
             color: Colors.grey[300],
           ),
+          SizedBox(height: 25,)
         ]
       ),
     );
