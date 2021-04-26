@@ -70,8 +70,7 @@ class UserRepository {
     final ParseUser parseUser = await ParseUser.currentUser();
 
     if (parseUser != null) {
-      parseUser.set<String>(keyUserName, user.name);
-      parseUser.set<String>(keyUserPhone, user.phone);
+      parseUser.set<String>(keyUserEmail, user.email);
 
       if (user.password != null) {
         parseUser.password = user.password;
@@ -87,9 +86,6 @@ class UserRepository {
 
         final loginResponse =
         await ParseUser(user.email, user.password, user.email).login();
-
-        if (!loginResponse.success)
-          return Future.error(ParseErrors.getDescription(response.error.code));
       }
     }
   }

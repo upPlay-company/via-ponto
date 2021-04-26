@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:viaponto_oficial/screens/account/edit_account_screen.dart';
 import 'package:viaponto_oficial/screens/inicial/components/inicial_tile.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
@@ -43,9 +44,11 @@ class PerfilScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(userManagerStore.user.email, style: TextStyle(fontSize: 18, color: primary),),
+                    Text(userManagerStore.user.email, style: TextStyle(fontSize: 18, color: primary)),
                     GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (_) => EditAccountScreen()));
+                        },
                         child: Icon(Icons.edit, color: primary,))
                   ],
                 )),
