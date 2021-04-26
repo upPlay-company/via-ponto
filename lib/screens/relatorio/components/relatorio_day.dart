@@ -37,17 +37,17 @@ class RelatorioDay extends StatelessWidget {
                           style: TextStyle(fontSize: 18),
                         ),
                         SizedBox(
-                          width: 30,
+                          width: 10,
                         ),
                         Text(
-                          'Dia: ${ponto.created.day}  Mês: ${ponto.created.month}',
-                          style: TextStyle(fontSize: 18),
+                          'Dia: ${ponto.created.day} Mês: ${ponto.created.month}',
+                          style: TextStyle(fontSize: 13),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 15),
+                    padding: const EdgeInsets.only(right: 5),
                     child: Row(
                       children: [
                         GestureDetector(
