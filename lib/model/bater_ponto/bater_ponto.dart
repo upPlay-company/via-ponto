@@ -14,7 +14,7 @@ class BaterPonto {
     empresas = Empresas.fromParse(object.get<ParseObject>(keyPontoIdEmpresa));
     user =
         UserRepository().mapParseToUser(object.get<ParseUser>(keyPontoIdUser));
-    created = object.createdAt;
+    created = object.get<DateTime>(keyPontoAt);
   }
 
   BaterPonto();

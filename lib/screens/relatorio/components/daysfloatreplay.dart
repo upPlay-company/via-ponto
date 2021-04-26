@@ -19,35 +19,36 @@ class _DaysFloatReplayState extends State<DaysFloatReplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(),
         body: Container(
-      padding: EdgeInsets.all(20.0),
-      color: Colors.blueGrey[100],
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: DatePicker(
-              DateTime.now(),
-              width: 10,
-              height: 30,
-              controller: _controller,
-              initialSelectedDate: DateTime.now(),
-              selectionColor: Colors.black,
-              selectedTextColor: Colors.white,
-              inactiveDates: [
-                DateTime.now().add(Duration(days: 3)),
-                DateTime.now().add(Duration(days: 4)),
-                DateTime.now().add(Duration(days: 7))
-              ],
-              onDateChange: (date) {
-                setState(() {
-                  _selectedValue = date;
-                });
-              },
-            ),
+          padding: EdgeInsets.all(20.0),
+          color: Colors.blueGrey[100],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: DatePicker(
+                  DateTime.now(),
+                  width: 80,
+                  height: 100,
+                  controller: _controller,
+                  initialSelectedDate: DateTime.now(),
+                  selectionColor: Colors.black,
+                  selectedTextColor: Colors.white,
+                  inactiveDates: [
+                    DateTime.now().add(Duration(days: 3)),
+                    DateTime.now().add(Duration(days: 4)),
+                    DateTime.now().add(Duration(days: 7))
+                  ],
+                  onDateChange: (date) {
+                    setState(() {
+                      _selectedValue = date;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }

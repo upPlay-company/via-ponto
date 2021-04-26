@@ -17,7 +17,6 @@ class RelatorioScreen extends StatefulWidget {
 
 class _RelatorioScreenState extends State<RelatorioScreen>
     with SingleTickerProviderStateMixin {
-
   TabController tabController;
 
   @override
@@ -25,7 +24,7 @@ class _RelatorioScreenState extends State<RelatorioScreen>
     super.initState();
 
     tabController =
-        TabController(length: 3, vsync: this, initialIndex: widget.inicialPage);
+        TabController(length: 2, vsync: this, initialIndex: widget.inicialPage);
   }
 
   @override
@@ -52,7 +51,6 @@ class _RelatorioScreenState extends State<RelatorioScreen>
           unselectedLabelColor: Colors.white,
           tabs: [
             Tab(child: Text('DIA', style: TextStyle(fontSize: 16))),
-            Tab(child: Text('SEMANA', style: TextStyle(fontSize: 16))),
             Tab(child: Text('MÊS', style: TextStyle(fontSize: 16))),
           ],
         ),
@@ -61,9 +59,6 @@ class _RelatorioScreenState extends State<RelatorioScreen>
         controller: tabController,
         children: [
           RelatorioDayScreen(),
-          Container(
-            child: RelatorioWeek(),
-          ),
           Container(
             child: RelatorioMonth(),
           ),

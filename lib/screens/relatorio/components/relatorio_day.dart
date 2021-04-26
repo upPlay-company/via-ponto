@@ -3,13 +3,18 @@ import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 
 class RelatorioDay extends StatelessWidget {
-  RelatorioDay(this.ponto, this.store);
+  RelatorioDay({this.ponto, this.store, this.date});
 
   final BaterPonto ponto;
   final MyPontoStore store;
 
+  final DateTime date;
+
   @override
   Widget build(BuildContext context) {
+    if (date.day == ponto.created.day &&
+        date.month == ponto.created.month &&
+        date.year == ponto.created.year)
       return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,13 +27,20 @@ class RelatorioDay extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(ponto.time,
-                            style:
-                            TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
                         SizedBox(
                           width: 30,
                         ),
                         Text(
                           '${ponto.registro}',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Dia: ${ponto.created.day}  Mês: ${ponto.created.month}',
                           style: TextStyle(fontSize: 18),
                         ),
                       ],
@@ -39,8 +51,7 @@ class RelatorioDay extends StatelessWidget {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: (){},
-                          child: Icon(Icons.description)),
+                            onTap: () {}, child: Icon(Icons.description)),
                       ],
                     ),
                   )
@@ -55,5 +66,7 @@ class RelatorioDay extends StatelessWidget {
           ],
         ),
       );
+    else
+      return Container();
   }
 }

@@ -15,7 +15,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final MyPontoStore store = MyPontoStore();
 
   DateTime date = DateTime.now();
@@ -93,17 +94,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       SizedBox(
                         height: 20,
                       ),
-                      if (date1 > 0 && date1 < 12)
-                        Text('Bom dia,', style: TextStyle(color: Colors.white)),
-                      if (date1 > 12 && date1 < 18)
-                        Text('Boa tarde,',
-                            style: TextStyle(color: Colors.white)),
-                      if (date1 > 18 && date1 < 0)
-                        Text('Boa noite,',
-                            style: TextStyle(color: Colors.white)),
-                      SizedBox(
-                        height: 5,
-                      ),
                       Text(userManagerStore.user.name,
                           style: TextStyle(color: Colors.white)),
                       SizedBox(
@@ -116,16 +106,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),
                       DigitalClock(
                         areaDecoration:
-                        BoxDecoration(color: Colors.transparent),
+                            BoxDecoration(color: Colors.transparent),
                         areaAligment: AlignmentDirectional.center,
                         hourMinuteDigitDecoration:
-                        BoxDecoration(color: Colors.transparent),
+                            BoxDecoration(color: Colors.transparent),
                         secondDigitDecoration:
-                        BoxDecoration(color: Colors.transparent),
+                            BoxDecoration(color: Colors.transparent),
                         hourMinuteDigitTextStyle:
-                        TextStyle(fontSize: 25, color: Colors.white),
+                            TextStyle(fontSize: 25, color: Colors.white),
                         secondDigitTextStyle:
-                        TextStyle(fontSize: 25, color: Colors.white),
+                            TextStyle(fontSize: 25, color: Colors.white),
                         is24HourTimeFormat: true,
                       ),
                     ],
