@@ -27,9 +27,9 @@ class _RelatorioDayScreenState extends State<RelatorioDayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomScrollView(slivers: [
-        SliverToBoxAdapter(
+      SliverToBoxAdapter(
           child: Column(
-            children: [
+        children: [
           Container(
             color: Theme.of(context).primaryColor,
             height: 120,

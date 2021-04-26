@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
+import 'package:viaponto_oficial/screens/relatorio/components/reportdays.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 
 class RelatorioDay extends StatelessWidget {
@@ -51,7 +52,15 @@ class RelatorioDay extends StatelessWidget {
                     child: Row(
                       children: [
                         GestureDetector(
-                            onTap: () {}, child: Icon(Icons.description)),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ReportDays(ponto: ponto)),
+                              );
+                            },
+                            child: Icon(Icons.description)),
                       ],
                     ),
                   )
