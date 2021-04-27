@@ -31,9 +31,9 @@ dependencies:
   parse_server_sdk_flutter: ^2.1.0
   pdf: ^1.9.0
   printing: ^3.5.0
+  intl: ^0.17.0
   bmnav: ^0.3.4
   line_icons: ^2.0.1
-  intl: ^0.17.0
   flutter_mobx: ^1.1.0+2
   get_it: ^6.0.0
   mobx: ^1.2.1+4
