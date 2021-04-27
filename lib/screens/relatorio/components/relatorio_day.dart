@@ -56,8 +56,9 @@ class RelatorioDay extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        ReportDays(ponto: ponto)),
+                                  builder: (context) =>
+                                      ReportDays(ponto: ponto),
+                                ),
                               );
                             },
                             child: Icon(Icons.description)),
