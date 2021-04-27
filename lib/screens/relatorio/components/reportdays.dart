@@ -1,200 +1,173 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
-import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
-class ReportDays extends StatefulWidget {
-  ReportDays({this.ponto});
-  final BaterPonto ponto;
-
-  @override
-  _ReportDaysState createState() => _ReportDaysState();
-}
-
-class _ReportDaysState extends State<ReportDays> {
-  _ReportDaysState({this.ponto}) {
-    generatePDFInvoice();
-  }
-
-  final BaterPonto ponto;
+class GeneratePDF {
+  BaterPonto ponto;
+  GeneratePDF({
+    @required this.ponto,
+  });
 
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-
-  //Declarações de funções
+  /// Cria e Imprime a fatura
   generatePDFInvoice() async {
     final pw.Document doc = pw.Document();
     doc.addPage(
       pw.MultiPage(
-        pageTheme: pw.PageTheme(margin: pw.EdgeInsets.zero),
         header: _buildHeader,
-        footer: _buildFooter,
         build: (context) => _buildContent(context),
       ),
     );
     await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => doc.save(),
-    );
+        onLayout: (PdfPageFormat format) async => doc.save());
   }
 
+  /// Constroi o cabeçalho da página
   pw.Widget _buildHeader(pw.Context context) {
     return pw.Container(
-      color: PdfColors.blue,
-      height: 150,
-      child: pw.Padding(
-        padding: pw.EdgeInsets.all(16),
-        child: pw.Row(
-          crossAxisAlignment: pw.CrossAxisAlignment.center,
-          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-          children: [
-            pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              crossAxisAlignment: pw.CrossAxisAlignment.center,
-              children: [
-                pw.Padding(
-                  padding: pw.EdgeInsets.all(8),
-                  child: pw.PdfLogo(),
-                ),
-                pw.Text(
-                  "Comprovante de Registro",
-                  style: pw.TextStyle(fontSize: 22, color: PdfColors.white),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+        color: PdfColors.green,
+        height: 150,
+        child: pw.Padding(
+            padding: pw.EdgeInsets.all(16),
+            child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Column(
+                      mainAxisAlignment: pw.MainAxisAlignment.center,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Padding(
+                            padding: pw.EdgeInsets.all(8), child: pw.PdfLogo()),
+                      ]),
+                  pw.Column(
+                      mainAxisAlignment: pw.MainAxisAlignment.center,
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Text('Compravante de Registro',
+                            style: pw.TextStyle(
+                                fontSize: 22, color: PdfColors.white))
+                      ])
+                ])));
   }
 
-  pw.Widget _buildFooter(pw.Context context) {
-    return pw.Container(
-      color: PdfColors.blue,
-      height: 130,
-      child: pw.Row(
-        crossAxisAlignment: pw.CrossAxisAlignment.center,
-        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-        children: [
-          pw.Padding(
-            padding: pw.EdgeInsets.only(left: 16),
-            child: pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              crossAxisAlignment: pw.CrossAxisAlignment.center,
-              children: [
-                _buildQrCode(context),
-                pw.Padding(
-                  padding: pw.EdgeInsets.only(top: 12),
-                  child: pw.Text("Email"),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
+  /// Constroi o conteúdo da página
   List<pw.Widget> _buildContent(pw.Context context) {
     return [
       pw.Padding(
-        padding: pw.EdgeInsets.only(
-          top: 30,
-          left: 25,
-          right: 25,
-        ),
-        child: _buildContentReport(),
-      ),
+          padding: pw.EdgeInsets.only(top: 30, left: 25, right: 25),
+          child: _buildContentClient()),
       pw.Padding(
-        padding: pw.EdgeInsets.only(
-          top: 30,
-          left: 25,
-          right: 25,
-        ),
-        child: pw.Container(),
-      ),
+          padding: pw.EdgeInsets.only(top: 50, left: 25, right: 25),
+          child: _contentTable(context)),
     ];
   }
 
-  pw.Widget _buildQrCode(pw.Context context) {}
-  pw.Widget _buildContentReport() {
+  pw.Widget _buildContentClient() {
     return pw.Row(
-      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+        children: [
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              _titleText('COMPROVANTE DO REGISTRO DO PONTO DO FUNCIONÁRIO'),
+            ],
+          ),
+        ]);
+  }
+
+  /// Retorna um texto com formatação própria para título
+  _titleText(String text) {
+    return pw.Padding(
+        padding: pw.EdgeInsets.only(top: 8),
+        child: pw.Text(text,
+            style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)));
+  }
+
+  /// Constroi uma tabela com base nos produtos da fatura
+  pw.Widget _contentTable(pw.Context context) {
+    // Define uma lista usada no cabeçalho
+
+    return pw.Column(
       children: [
-        pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
+        pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
-            pw.Text('Cliente'),
-            pw.Text(
-              "COMPROVANTE DO REGISTRO DO PONTO \n DO FUNCIONÁRIO",
-              style: pw.TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            pw.Text(
-              "RAZÃO SOCIAL: ${ponto.empresas.razaoSocial}",
-              style: pw.TextStyle(fontSize: 18, color: PdfColors.green),
-            ),
-            pw.Text("LOCAL: ${ponto.empresas.logradouro}"),
-            pw.Text("TIPO: ${ponto.registro}"),
-            pw.Text("NOME: ${ponto.user.name}"),
-            pw.Text("DATA: ${ponto.created}"),
-          ],
+            pw.Text('RAZÃO SOCIAL: '),
+            pw.Text(ponto.empresas.nomeEmpresa),
+          ]
         ),
-      ],
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('CNPJ: '),
+              pw.Text(ponto.empresas.cnpj),
+            ]
+        ),
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('LOCAL: '),
+              pw.Text(ponto.localization),
+            ]
+        ),
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('TIPO: '),
+              pw.Text(ponto.registro),
+            ]
+        ),
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('NOME: '),
+              pw.Text(userManagerStore.user.name),
+            ]
+        ),
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('DATA: '),
+              pw.Text('${ponto.created.day}/${ponto.created.month}/${ponto.created.year}'),
+            ]
+        ),
+        pw.SizedBox(height: 15),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Text('HORA: '),
+              pw.Text('${ponto.time}'),
+            ]
+        ),
+      ]
     );
   }
 
-  pw.Widget _contentTable(pw.Context context) {
-    const tableHeaders = [
-      'a',
-      'a',
-      'a',
-      'a',
-      'a',
-    ];
-    return pw.Table.fromTextArray(
-      border: null,
-      cellAlignment: pw.Alignment.centerLeft,
-      // ignore: deprecated_member_use
-      headerDecoration: pw.BoxDecoration(
-        // ignore: deprecated_member_use
-        borderRadius: 2,
-      ),
-      headerHeight: 25,
-      cellHeight: 40,
-      cellAlignments: {
-        0: pw.Alignment.centerLeft,
-        1: pw.Alignment.centerLeft,
-        2: pw.Alignment.centerRight,
-        3: pw.Alignment.center,
-        4: pw.Alignment.centerRight,
-      },
-      //Define um estilo para o cabeçalho da tabela
-      headerStyle: pw.TextStyle(
-        fontSize: 18,
-        color: PdfColors.blue,
-        fontWeight: pw.FontWeight.bold,
-      ),
-      //Define um estilo para a célula
-      cellStyle: const pw.TextStyle(
-        fontSize: 18,
-      ),
-      //Define a decoração
-      rowDecoration: pw.BoxDecoration(
-        border: pw.BoxBorder(
-          bottom: true,
-          color: PdfColors.blue,
-          width: .5,
-        ),
-      ),
-      headers: tableHeaders, data: [],
-    );
+  /// Retorna o valor correspondente a coluna
+  String _getValueIndex(BaterPonto ponto, int col) {
+    switch (col) {
+      case 0:
+        return ponto.id.toString();
+      case 1:
+        return ponto.time;
+      case 2:
+        return ponto.quantity.toString();
+
+
+    }
+    return '';
   }
+
 }

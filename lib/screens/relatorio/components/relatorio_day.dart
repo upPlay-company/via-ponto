@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/screens/relatorio/components/reportdays.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
+import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class RelatorioDay extends StatelessWidget {
   RelatorioDay({this.ponto, this.store, this.date});
@@ -10,6 +12,8 @@ class RelatorioDay extends StatelessWidget {
   final MyPontoStore store;
 
   final DateTime date;
+
+  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +57,8 @@ class RelatorioDay extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ReportDays(ponto: ponto),
-                                ),
-                              );
+                              GeneratePDF generatePdf = GeneratePDF(ponto: ponto);
+                              generatePdf.generatePDFInvoice();
                             },
                             child: Icon(Icons.description)),
                       ],
