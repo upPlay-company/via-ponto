@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
-import 'package:viaponto_oficial/screens/relatorio/components/reportdays.dart';
+import 'package:viaponto_oficial/screens/relatorio/components/report_day_pdf.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
