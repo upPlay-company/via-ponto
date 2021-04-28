@@ -94,65 +94,43 @@ class GeneratePDF {
   pw.Widget _contentTable(pw.Context context) {
     // Define uma lista usada no cabeçalho
 
-    return pw.Column(
-      children: [
-        pw.Row(
-          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-          children: [
-            pw.Text('RAZÃO SOCIAL: '),
-            pw.Text(ponto.empresas.nomeEmpresa),
-          ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('CNPJ: '),
-              pw.Text(ponto.empresas.cnpj),
-            ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('LOCAL: '),
-              pw.Text(ponto.localization),
-            ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('TIPO: '),
-              pw.Text(ponto.registro),
-            ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('NOME: '),
-              pw.Text(userManagerStore.user.name),
-            ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('DATA: '),
-              pw.Text('${ponto.created.day}/${ponto.created.month}/${ponto.created.year}'),
-            ]
-        ),
-        pw.SizedBox(height: 15),
-        pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-            children: [
-              pw.Text('HORA: '),
-              pw.Text('${ponto.time}'),
-            ]
-        ),
-      ]
-    );
+    return pw.Column(children: [
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('RAZÃO SOCIAL: '),
+        pw.Text(ponto.empresas.nomeEmpresa),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('CNPJ: '),
+        pw.Text(ponto.empresas.cnpj),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('LOCAL: '),
+        pw.Text(ponto.localization),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('TIPO: '),
+        pw.Text(ponto.registro),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('NOME: '),
+        pw.Text(userManagerStore.user.name),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('DATA: '),
+        pw.Text(
+            '${ponto.created.day}/${ponto.created.month}/${ponto.created.year}'),
+      ]),
+      pw.SizedBox(height: 15),
+      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+        pw.Text('HORA: '),
+        pw.Text('${ponto.time}'),
+      ]),
+    ]);
   }
 
   /// Retorna o valor correspondente a coluna
@@ -164,10 +142,7 @@ class GeneratePDF {
         return ponto.time;
       case 2:
         return ponto.quantity.toString();
-
-
     }
     return '';
   }
-
 }
