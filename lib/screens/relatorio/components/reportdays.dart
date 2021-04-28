@@ -50,7 +50,7 @@ class GeneratePDF {
                       mainAxisAlignment: pw.MainAxisAlignment.center,
                       crossAxisAlignment: pw.CrossAxisAlignment.center,
                       children: [
-                        pw.Text('Compravante de Registro',
+                        pw.Text('Comprovante de Registro',
                             style: pw.TextStyle(
                                 fontSize: 22, color: PdfColors.white))
                       ])
@@ -97,63 +97,108 @@ class GeneratePDF {
     return pw.Column(
       children: [
         pw.Row(
-          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
           children: [
             pw.Text('RAZÃO SOCIAL: '),
-            pw.Text(ponto.empresas.nomeEmpresa),
           ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 5),
         pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
+              pw.Text(ponto.empresas.razaoSocial),
+            ]
+        ),
+        pw.SizedBox(height: 20),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('CNPJ: '),
+            ]
+        ),
+        pw.SizedBox(height: 5),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text(ponto.empresas.cnpj),
             ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 20),
         pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('LOCAL: '),
             ]
         ),
+        pw.SizedBox(height: 5),
         pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text(ponto.localization),
             ]
         ),
-        pw.SizedBox(height: 5),
+        pw.SizedBox(height: 20),
         pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('TIPO: '),
+            ]
+        ),
+        pw.SizedBox(height: 5),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text(ponto.registro),
             ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 20),
         pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('NOME: '),
+            ]
+        ),
+        pw.SizedBox(height: 5),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text(userManagerStore.user.name),
             ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 20),
         pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
               pw.Text('DATA: '),
+            ]
+        ),
+        pw.SizedBox(height: 5),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text('${ponto.created.day}/${ponto.created.month}/${ponto.created.year}'),
             ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 20),
         pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('HORA: '),
+            ]
+        ),
+        pw.SizedBox(height: 5),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text('${ponto.time}'),
+            ]
+        ),
+        pw.SizedBox(height: 100),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text('Registrado pelo Aplicativo VIA PONTO', style: pw.TextStyle(
+                  fontSize: 18, color: PdfColors.green)),
             ]
         ),
       ]
