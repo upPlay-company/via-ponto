@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+import 'package:viaponto_oficial/screens/base/base_screen.dart';
+import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 import 'components/inicial_tile.dart';
 
@@ -11,12 +14,17 @@ class InicialScreen extends StatefulWidget {
 
 class _InicialScreenState extends State<InicialScreen> {
 
+  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
+
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 4)).then((_){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>InicialTile()));
+      if(!userManagerStore.isLoggedIn)
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>InicialTile()));
+      else
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BaseScreen()));
     });
   }
 
