@@ -17,18 +17,18 @@ mixin _$BaterPontoStore on _BaterPontoStore, Store {
               name: '_BaterPontoStore.sendPressed'))
           .value;
 
-  final _$quantityAtom = Atom(name: '_BaterPontoStore.quantity');
+  final _$locationAtom = Atom(name: '_BaterPontoStore.location');
 
   @override
-  int get quantity {
-    _$quantityAtom.reportRead();
-    return super.quantity;
+  String get location {
+    _$locationAtom.reportRead();
+    return super.location;
   }
 
   @override
-  set quantity(int value) {
-    _$quantityAtom.reportWrite(value, super.quantity, () {
-      super.quantity = value;
+  set location(String value) {
+    _$locationAtom.reportWrite(value, super.location, () {
+      super.location = value;
     });
   }
 
@@ -88,11 +88,11 @@ mixin _$BaterPontoStore on _BaterPontoStore, Store {
       ActionController(name: '_BaterPontoStore');
 
   @override
-  int setQuantity(int value) {
+  String setLocation(String value) {
     final _$actionInfo = _$_BaterPontoStoreActionController.startAction(
-        name: '_BaterPontoStore.setQuantity');
+        name: '_BaterPontoStore.setLocation');
     try {
-      return super.setQuantity(value);
+      return super.setLocation(value);
     } finally {
       _$_BaterPontoStoreActionController.endAction(_$actionInfo);
     }
@@ -101,7 +101,7 @@ mixin _$BaterPontoStore on _BaterPontoStore, Store {
   @override
   String toString() {
     return '''
-quantity: ${quantity},
+location: ${location},
 loading: ${loading},
 error: ${error},
 savedAd: ${savedAd},

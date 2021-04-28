@@ -40,6 +40,7 @@ class BaterPontoRepository {
           userManagerStore.user.password, userManagerStore.user.email)
         ..set(keyUserId, userManagerStore.user.id);
 
+      // ignore: non_constant_identifier_names
       final PontoObject = ParseObject(keyPontoTable);
 
       final parseAcl = ParseACL(owner: parseUser);
@@ -47,7 +48,7 @@ class BaterPontoRepository {
       parseAcl.setPublicWriteAccess(allowed: false);
       PontoObject.setACL(parseAcl);
 
-      PontoObject.set<String>(keyPontoLocal, 'Rua Elias Gorayeb, 3091');
+      PontoObject.set<String>(keyPontoLocal, ponto.localization);
       PontoObject.set<String>(keyPontoHorario, formatTimeBanco);
       PontoObject.set<ParseUser>(keyPontoIdUser, parseUser);
 

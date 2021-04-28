@@ -11,16 +11,16 @@ abstract class _BaterPontoStore with Store {
   final MyPontoStore store = MyPontoStore();
 
   _BaterPontoStore({this.ponto}) {
-    quantity = ponto.quantity;
+    location = ponto.localization;
   }
 
   final BaterPonto ponto;
 
   @observable
-  int quantity;
+  String location;
 
   @action
-  int setQuantity(int value) => quantity = value;
+  String setLocation(String value) => location = value;
 
   @computed
   Function get sendPressed => _send;
@@ -36,7 +36,7 @@ abstract class _BaterPontoStore with Store {
 
   @action
   Future<void> _send() async {
-    ponto.quantity = quantity;
+    ponto.localization = location;
     try {
       loading = true;
       await BaterPontoRepository().save(ponto, store);
