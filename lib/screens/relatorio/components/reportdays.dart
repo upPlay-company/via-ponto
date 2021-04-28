@@ -113,13 +113,18 @@ class GeneratePDF {
         ),
         pw.SizedBox(height: 15),
         pw.Row(
-            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
             children: [
               pw.Text('LOCAL: '),
+            ]
+        ),
+        pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
               pw.Text(ponto.localization),
             ]
         ),
-        pw.SizedBox(height: 15),
+        pw.SizedBox(height: 5),
         pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
@@ -153,21 +158,6 @@ class GeneratePDF {
         ),
       ]
     );
-  }
-
-  /// Retorna o valor correspondente a coluna
-  String _getValueIndex(BaterPonto ponto, int col) {
-    switch (col) {
-      case 0:
-        return ponto.id.toString();
-      case 1:
-        return ponto.time;
-      case 2:
-        return ponto.quantity.toString();
-
-
-    }
-    return '';
   }
 
 }

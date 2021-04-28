@@ -14,6 +14,7 @@ class Empresas {
     this.uf,
     this.logradouro,
     this.celEmpresa,
+    // ignore: non_constant_identifier_names
     this.IE,
     this.numero,
     this.telComercial
@@ -48,6 +49,7 @@ class Empresas {
   final String logradouro;
   final String telComercial;
   final String numero;
+  // ignore: non_constant_identifier_names
   final String IE;
   final String celEmpresa;
 

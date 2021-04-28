@@ -84,7 +84,6 @@ class UserRepository {
       if (user.password != null) {
         await parseUser.logout();
 
-        final loginResponse =
         await ParseUser(user.email, user.password, user.email).login();
       }
     }

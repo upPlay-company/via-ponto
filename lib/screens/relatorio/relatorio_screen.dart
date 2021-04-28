@@ -2,7 +2,6 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:viaponto_oficial/screens/relatorio/components/relatorio_month.dart';
-import 'package:viaponto_oficial/screens/relatorio/components/relatorio_week.dart';
 
 import 'components/relatorio_day_screen.dart';
 
