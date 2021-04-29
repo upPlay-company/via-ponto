@@ -1,4 +1,3 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
@@ -11,8 +10,6 @@ class RelatorioMonth extends StatefulWidget {
 }
 
 class _RelatorioMonthState extends State<RelatorioMonth> {
-  DatePickerController _controller = DatePickerController();
-
   DateTime _selectedValue = DateTime.now();
 
   final MyPontoStore store = MyPontoStore();
@@ -33,31 +30,51 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
         children: [
           Container(
             color: Theme.of(context).primaryColor,
-            height: 120,
-            child: Padding(
-              padding: EdgeInsets.zero,
-              child: Container(
-                color: Theme.of(context).primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
+            height: 80,
+            padding: EdgeInsets.only(
+              top: 40,
+              left: MediaQuery.of(context).size.width * 0.12,
+              right: MediaQuery.of(context).size.width * 0.12,
+            ),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return GridTile(
                   child: Container(
-                    padding: EdgeInsets.only(right: 15),
-                    child: Container(
-                      height: 50.0,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Icon(Icons.arrow_left),
-                            title: Text("${returnMesInt(month[index])}"),
-                          );
-                        },
-                        itemCount: month.length,
-                        scrollDirection: Axis.vertical,
-                      ),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 5,
                     ),
+                    color: Theme.of(context).primaryColor,
+                    child: month[index] == DateTime.now().month
+                        ? Center(
+                            child: Card(
+                              color: Colors.black,
+                              child: Text(
+                                returnMesString(
+                                  month[index],
+                                ),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Text(
+                            returnMesString(
+                              month[index],
+                            ),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
                   ),
-                ),
-              ),
+                );
+              },
+              itemCount: month.length,
+              scrollDirection: Axis.horizontal,
             ),
           ),
           Container(
@@ -121,8 +138,8 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
     ]));
   }
 
-  //Função para interar a lista de mês e retorn inteiro
-  String returnMesInt(int month) {
+  //Função para interar a lista de mês e return String tipo mês
+  String returnMesString(int month) {
     switch (month) {
       case 1:
         return 'Janeiro';
