@@ -14,7 +14,22 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
 
   final MyPontoStore store = MyPontoStore();
   final BaterPonto ponto = BaterPonto();
-  final List<int> month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  final List<int> month = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+  ];
+  int monthIndex = DateTime.now().month;
 
   @override
   void initState() {
@@ -32,7 +47,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
             color: Theme.of(context).primaryColor,
             height: 80,
             padding: EdgeInsets.only(
-              top: 40,
+              top: 20,
               left: MediaQuery.of(context).size.width * 0.12,
               right: MediaQuery.of(context).size.width * 0.12,
             ),
@@ -44,7 +59,14 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                       horizontal: 5,
                     ),
                     color: Theme.of(context).primaryColor,
-                    child: returnMonthcurrent(index),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          monthIndex = index;
+                        });
+                      },
+                      child: returnMonthcurrent(index, monthIndex),
+                    ),
                   ),
                 );
               },
@@ -101,7 +123,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
               ponto: section,
               store: store,
               date: _selectedValue,
-              month: month,
+              month: monthIndex,
             );
           }).toList();
 
@@ -158,11 +180,33 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
   }
 
   //Função para retorna mês atual
-  Widget returnMonthcurrent(int index) {
-    return month[index] == DateTime.now().month
-        ? Center(
-            child: Card(
+  Widget returnMonthcurrent(int index, int monthIndex) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 30,
+        right: 30,
+      ),
+      child: month[index] == monthIndex
+          ? Card(
               color: Colors.black,
+              child: Container(
+                height: 80,
+                width: 80,
+                child: Center(
+                  child: Text(
+                    returnMesString(
+                      month[index],
+                    ),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          : Center(
               child: Text(
                 returnMesString(
                   month[index],
@@ -170,20 +214,10 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
-          )
-        : Text(
-            returnMesString(
-              month[index],
-            ),
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          );
+    );
   }
 }

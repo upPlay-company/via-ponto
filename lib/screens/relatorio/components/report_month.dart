@@ -16,7 +16,8 @@ class ReportMonth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (month[3] == ponto.created.month)
+    print("Mes: $month");
+    if (month == ponto.created.month)
       return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
