@@ -11,25 +11,11 @@ class RelatorioMonth extends StatefulWidget {
 
 class _RelatorioMonthState extends State<RelatorioMonth> {
   DateTime _selectedValue = DateTime.now();
+  int monthIndex = DateTime.now().month;
 
   final MyPontoStore store = MyPontoStore();
   final BaterPonto ponto = BaterPonto();
-  final List<int> month = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-  ];
-  int monthIndex = DateTime.now().month;
+  final List<int> month = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   @override
   void initState() {
