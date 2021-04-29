@@ -44,32 +44,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                       horizontal: 5,
                     ),
                     color: Theme.of(context).primaryColor,
-                    child: month[index] == DateTime.now().month
-                        ? Center(
-                            child: Card(
-                              color: Colors.black,
-                              child: Text(
-                                returnMesString(
-                                  month[index],
-                                ),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Text(
-                            returnMesString(
-                              month[index],
-                            ),
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
+                    child: returnMonthcurrent(index),
                   ),
                 );
               },
@@ -180,5 +155,35 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
       default:
         return '';
     }
+  }
+
+  //Função para retorna mês atual
+  Widget returnMonthcurrent(int index) {
+    return month[index] == DateTime.now().month
+        ? Center(
+            child: Card(
+              color: Colors.black,
+              child: Text(
+                returnMesString(
+                  month[index],
+                ),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+        : Text(
+            returnMesString(
+              month[index],
+            ),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          );
   }
 }
