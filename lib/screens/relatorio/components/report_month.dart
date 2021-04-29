@@ -5,20 +5,19 @@ import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
 class ReportMonth extends StatelessWidget {
-  ReportMonth({this.ponto, this.store, this.date});
+  ReportMonth({this.ponto, this.store, this.date, this.month});
 
   final BaterPonto ponto;
   final MyPontoStore store;
-
+  final month;
   final DateTime date;
 
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
   @override
   Widget build(BuildContext context) {
-    if (date.day == ponto.created.day &&
-        date.month == ponto.created.month &&
-        date.year == ponto.created.year)
+    print("month report_month: ${month[3]}");
+    if (month[3] == ponto.created.month)
       return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

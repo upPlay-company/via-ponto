@@ -17,6 +17,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
 
   final MyPontoStore store = MyPontoStore();
   final BaterPonto ponto = BaterPonto();
+  final List<int> month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   @override
   void initState() {
@@ -36,34 +37,27 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
             child: Padding(
               padding: EdgeInsets.zero,
               child: Container(
-                  color: Theme.of(context).primaryColor,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Container(
-                          padding: EdgeInsets.only(right: 15),
-                          child: DatePicker(
-                            DateTime.now().subtract(Duration(days: 30)),
-                            locale: "pt-br",
-                            width: 50,
-                            height: 100,
-                            controller: _controller,
-                            daysCount: 31,
-                            initialSelectedDate: DateTime.now(),
-                            selectionColor: Colors.black,
-                            selectedTextColor: Colors.white,
-                            onDateChange: (date) {
-                              setState(() {
-                                _selectedValue = date;
-                              });
-                            },
-                          ),
-                        ),
+                color: Theme.of(context).primaryColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Container(
+                    padding: EdgeInsets.only(right: 15),
+                    child: Container(
+                      height: 50.0,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: Icon(Icons.arrow_left),
+                            title: Text("${returnMesInt(month[index])}"),
+                          );
+                        },
+                        itemCount: month.length,
+                        scrollDirection: Axis.vertical,
                       ),
-                    ],
-                  )),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           Container(
@@ -77,7 +71,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                     children: [
                       Text('HORAS TOTAIS'),
                       SizedBox(height: 10),
-                      Text('08:00')
+                      Text('08:00'),
                     ],
                   ),
                 ),
@@ -87,7 +81,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                     children: [
                       Text('HORAS EXTRAS'),
                       SizedBox(height: 10),
-                      Text('01:00')
+                      Text('01:00'),
                     ],
                   ),
                 ),
@@ -97,7 +91,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                     children: [
                       Text('FALTAS'),
                       SizedBox(height: 10),
-                      Text('10')
+                      Text('10'),
                     ],
                   ),
                 )
@@ -112,7 +106,11 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
 
           final List<Widget> children = store.allAds.map<Widget>((section) {
             return ReportMonth(
-                ponto: section, store: store, date: _selectedValue);
+              ponto: section,
+              store: store,
+              date: _selectedValue,
+              month: month,
+            );
           }).toList();
 
           return SliverList(
@@ -121,5 +119,49 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
         },
       )
     ]));
+  }
+
+  //Função para interar a lista de mês e retorn inteiro
+  String returnMesInt(int month) {
+    switch (month) {
+      case 1:
+        return 'Janeiro';
+        break;
+      case 2:
+        return 'Feveiro';
+        break;
+      case 3:
+        return 'Março';
+        break;
+      case 4:
+        return 'Abril';
+        break;
+      case 5:
+        return 'Maio';
+        break;
+      case 6:
+        return 'Junho';
+        break;
+      case 7:
+        return 'Julho';
+        break;
+      case 8:
+        return 'Agosto';
+        break;
+      case 9:
+        return 'Setembro';
+        break;
+      case 10:
+        return 'Outubro';
+        break;
+      case 11:
+        return 'Novembro';
+        break;
+      case 12:
+        return 'Dezembro';
+        break;
+      default:
+        return '';
+    }
   }
 }
