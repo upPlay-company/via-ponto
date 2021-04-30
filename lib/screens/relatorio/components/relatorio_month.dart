@@ -87,16 +87,6 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('FALTAS'),
-                      SizedBox(height: 10),
-                      Text('10'),
-                    ],
-                  ),
-                )
               ],
             ),
           ),

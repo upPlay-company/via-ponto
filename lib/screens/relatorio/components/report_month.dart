@@ -43,7 +43,7 @@ class ReportMonth extends StatelessWidget {
                         ),
                         RichText(
                           text: TextSpan(
-                            text: 'Trabalhando: ${ponto.time}',
+                            text: 'Trabalhado: ${ponto.time}',
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
