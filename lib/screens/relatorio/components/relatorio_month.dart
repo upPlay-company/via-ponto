@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
@@ -169,15 +171,17 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
   Widget returnMonthcurrent(int index, int monthIndex) {
     return Padding(
       padding: EdgeInsets.only(
-        left: 30,
-        right: 30,
+        left: 25,
+        right: 25,
       ),
       child: month[index] == monthIndex
           ? Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100),
+              ),
               color: Colors.black,
               child: Container(
-                height: 80,
-                width: 80,
+                width: MediaQuery.of(context).size.width * .3,
                 child: Center(
                   child: Text(
                     returnMesString(
