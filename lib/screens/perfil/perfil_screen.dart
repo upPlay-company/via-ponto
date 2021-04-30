@@ -120,7 +120,37 @@ class PerfilScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Sábado:', style: TextStyle(fontSize: 18, color: Colors.black),),
-                    Text('${userManagerStore.user.sabadoEntrada1} as ${userManagerStore.user.sabadoSaida1}', style: TextStyle(fontSize: 18, color: primary),),
+                      Row(
+                        children: [
+                          if(userManagerStore.user.sabadoEntrada1 != 'nao definido')
+                            Text('${userManagerStore.user.sabadoEntrada1} as ${userManagerStore.user.sabadoSaida1}', style: TextStyle(fontSize: 18, color: primary),),
+                          if(userManagerStore.user.sabadoEntrada2 != 'nao definido')
+                            Text(' / ${userManagerStore.user.sabadoEntrada2} as ${userManagerStore.user.sabadoSaida2}', style: TextStyle(fontSize: 18, color: primary),),
+                        ],
+                      ),
+                    if(userManagerStore.user.sabadoEntrada1 == 'nao definido' && userManagerStore.user.sabadoEntrada2 == 'nao definido')
+                      Text('Dia não facultativo', style: TextStyle(fontSize: 18, color: primary),),
+
+                  ],
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 16),
+            child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Domingo:', style: TextStyle(fontSize: 18, color: Colors.black),),
+                    Row(
+                      children: [
+                        if(userManagerStore.user.domingoEntrada1 != 'nao definido')
+                          Text('${userManagerStore.user.sabadoEntrada1} as ${userManagerStore.user.sabadoSaida1}', style: TextStyle(fontSize: 18, color: primary),),
+                        if(userManagerStore.user.domingoEntrada2 != 'nao definido')
+                          Text(' / ${userManagerStore.user.sabadoEntrada2} as ${userManagerStore.user.sabadoSaida2}', style: TextStyle(fontSize: 18, color: primary),),
+                      ],
+                    ),
+                    if(userManagerStore.user.domingoEntrada1 == 'nao definido' && userManagerStore.user.domingoEntrada2 == 'nao definido')
+                      Text('Dia não facultativo', style: TextStyle(fontSize: 18, color: primary),),
                   ],
                 )),
           ),
