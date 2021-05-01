@@ -24,12 +24,18 @@ class ReportMonth extends StatelessWidget {
       domingoEntrada1,
       domingoEntrada2,
       domingoSaida1,
-      domingoSaida2;
+      domingoSaida2,
+      pontoTime;
 
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
   @override
   Widget build(BuildContext context) {
+    //pontotiment
+
+    pontoTime = ponto.time.replaceAll(new RegExp(':'), '');
+    int pontoTimeInt = int.parse(pontoTime);
+
     // segunda a sexta
     semanaEntrada1 =
         userManagerStore.user.semanaEntrada1.replaceAll(new RegExp(':'), '');
@@ -44,33 +50,8 @@ class ReportMonth extends StatelessWidget {
     int horasaida1 = int.parse(semanaSaida1);
     int horasaida2 = int.parse(semanaSaida2);
 
-    // sabado
-    sabadoEntrada1 =
-        userManagerStore.user.sabadoEntrada1.replaceAll(new RegExp(':'), '');
-    sabadoEntrada2 =
-        userManagerStore.user.sabadoEntrada2.replaceAll(new RegExp(':'), '');
-    sabadoSaida1 =
-        userManagerStore.user.sabadoSaida1.replaceAll(new RegExp(':'), '');
-    sabadoSaida2 =
-        userManagerStore.user.sabadoSaida2.replaceAll(new RegExp(':'), '');
-    int sabadoentrada1 = int.parse(sabadoEntrada1);
-    int sabadoentrada2 = int.parse(sabadoEntrada2);
-    int sabadosaida1 = int.parse(sabadoSaida1);
-    int sabadosaida2 = int.parse(sabadoSaida2);
-
-    // domingo
-    domingoEntrada1 =
-        userManagerStore.user.semanaEntrada1.replaceAll(new RegExp(':'), '');
-    domingoEntrada2 =
-        userManagerStore.user.semanaEntrada2.replaceAll(new RegExp(':'), '');
-    domingoSaida1 =
-        userManagerStore.user.semanaSaida1.replaceAll(new RegExp(':'), '');
-    domingoSaida2 =
-        userManagerStore.user.semanaSaida2.replaceAll(new RegExp(':'), '');
-    int domingoentrada1 = int.parse(domingoEntrada1);
-    int domingoentrada2 = int.parse(domingoEntrada2);
-    int domingosaida1 = int.parse(domingoSaida1);
-    int domingosaida2 = int.parse(domingoSaida2);
+    print(
+        "carga teste: ${cargaHorariaDiaria(saida: horasaida1, entrada: horaentrada1, pontoSaida: 1300, pontoEntrada: 800, pontoSaida1: 1400, pontoEntrada1: 1800)}");
 
     if (month == ponto.created.month)
       return Container(
