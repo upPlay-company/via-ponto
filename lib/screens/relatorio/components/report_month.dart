@@ -50,8 +50,16 @@ class ReportMonth extends StatelessWidget {
     int horasaida1 = int.parse(semanaSaida1);
     int horasaida2 = int.parse(semanaSaida2);
 
-    print(
-        "carga teste: ${cargaHorariaDiaria(saida: horasaida1, entrada: horaentrada1, pontoSaida: 1300, pontoEntrada: 800, pontoSaida1: 1400, pontoEntrada1: 1800)}");
+    double teste = cargaHorariaDiaria(
+        saida: 1200,
+        entrada: 800,
+        saida1: 1800,
+        entrada1: 1400,
+        pontoSaida: 1200,
+        pontoEntrada: 800,
+        pontoSaida1: 1800,
+        pontoEntrada1: 1400);
+    print("Teste de Carga: $teste");
 
     if (month == ponto.created.month)
       return Container(
@@ -114,22 +122,32 @@ class ReportMonth extends StatelessWidget {
 
   //Declarações de funções
   //Calculo para carga horaria normais e prorrogada
+  @required
   double cargaHorariaDiaria({
     int saida, //saida do horario de trabalho,
     int entrada, //entrada do horario de trabalho
-    int pontoEntrada, //entrada do funcionario no trabalho
+    int saida1, //saida do horario de trabalho,
+    int entrada1, //entrada do horario de trabalho
     int pontoSaida, //saida do funcionario no trabalho
-    int pontoEntrada1, // segunda entrada do funcionario no trabalho
+    int pontoEntrada, //entrada do funcionario no trabalho
     int pontoSaida1, //segunda saida do funcionario no trabalho
-  }) {
+    int pontoEntrada1,
+  } // segunda entrada do funcionario no trabalho
+      ) {
     //Declarações de variaveis processamento matematico
     // calculo de conversão da carga horaria em minutos
-    double cargaHoraria = ((saida - entrada) / 100) * 60;
+    double cargaHorariaManha = (((saida - entrada) / 100) * 60);
+    double cargaHorariaTarde = (((saida1 - entrada1) / 100) * 60);
+    double cargaHoraria = cargaHorariaManha + cargaHorariaTarde;
+
     //Variavel para retorna o calculo das horas extras
     double cargaProrrogada;
     //Calculo para retorna a carga horaria que o funcionario cumpri no dia
-    double cargaHorariaDiaria = ((pontoSaida - pontoEntrada) / 100) * 60 +
-        ((pontoSaida1 - pontoEntrada1) / 100) * 60;
+    double cargaHorariaDiariaManha = (((pontoSaida - pontoEntrada) / 100) * 60);
+    double cargaHorariaDIariaTarde =
+        (((pontoSaida1 - pontoEntrada1) / 100) * 60);
+    double cargaHorariaDiaria =
+        cargaHorariaDiariaManha + cargaHorariaDIariaTarde;
 
     //Processamento de valores e resultados
     //If para retorna a cargaHorariaDiaria funcionario cumprida no dia
@@ -138,8 +156,8 @@ class ReportMonth extends StatelessWidget {
       return cargaHorariaDiaria;
     }
     //else if para retorna a horas extra do funcionario excedida no dia
-    else if (cargaHoraria > cargaHorariaDiaria) {
-      return cargaProrrogada = cargaHoraria - cargaHorariaDiaria;
+    else if (cargaHorariaDiaria > cargaHoraria) {
+      return cargaProrrogada = cargaHorariaDiaria - cargaHoraria;
     }
     return 0;
   }
