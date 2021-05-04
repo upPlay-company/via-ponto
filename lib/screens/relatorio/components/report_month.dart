@@ -103,8 +103,7 @@ class ReportMonth extends StatelessWidget {
                         ),
                         RichText(
                           text: TextSpan(
-                            text:
-                                'Trabalhado: ${cargaHorariaDiaria(saida: horasaida1, entrada: horaentrada1, saida1: horasaida2, entrada1: horaentrada2, pontoSaida: 1200, pontoEntrada: 800, pontoSaida1: 1800, pontoEntrada1: 1400)}',
+                            text: 'Trabalhado: ${teste / 60}',
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
