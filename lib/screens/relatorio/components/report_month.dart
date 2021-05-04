@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
-import 'package:viaponto_oficial/repository/bater_ponto_repository.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
@@ -10,7 +9,6 @@ class ReportMonth extends StatelessWidget {
 
   final BaterPonto ponto;
   final MyPontoStore store;
-  BaterPontoRepository teste;
   final month;
   final DateTime date;
   String semanaEntrada1,
@@ -24,18 +22,12 @@ class ReportMonth extends StatelessWidget {
       domingoEntrada1,
       domingoEntrada2,
       domingoSaida1,
-      domingoSaida2,
-      pontoTime;
+      domingoSaida2;
 
   final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
 
   @override
   Widget build(BuildContext context) {
-    //pontotiment
-
-    pontoTime = ponto.time.replaceAll(new RegExp(':'), '');
-    int pontoTimeInt = int.parse(pontoTime);
-
     // segunda a sexta
     semanaEntrada1 =
         userManagerStore.user.semanaEntrada1.replaceAll(new RegExp(':'), '');
@@ -50,16 +42,39 @@ class ReportMonth extends StatelessWidget {
     int horasaida1 = int.parse(semanaSaida1);
     int horasaida2 = int.parse(semanaSaida2);
 
+    //Ponto do funcionario
+    int pontoSaida;
+    int pontoEntrada;
+    int pontoSaida1;
+    int pontoEntrada1;
+
+    if (month == ponto.created.month &&
+        ponto.registro == "1ª Entrada" &&
+        ponto.created.day == ponto.created.day) {
+      pontoEntrada = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
+    } else if (month == ponto.created.month &&
+        ponto.registro == "2ª Entrada" &&
+        ponto.created.day == ponto.created.day) {
+      pontoEntrada1 = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
+    } else if (month == ponto.created.month &&
+        ponto.registro == "1ª Saída" &&
+        ponto.created.day == ponto.created.day) {
+      pontoSaida = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
+    } else if (month == ponto.created.month &&
+        ponto.registro == "2ª Saída" &&
+        ponto.created.day == ponto.created.day) {
+      pontoSaida1 = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
+    }
+
     double teste = cargaHorariaDiaria(
-        saida: 1200,
-        entrada: 800,
-        saida1: 1800,
-        entrada1: 1400,
-        pontoSaida: 1200,
-        pontoEntrada: 800,
-        pontoSaida1: 1800,
-        pontoEntrada1: 1400);
-    print("Teste de Carga: $teste");
+        saida: horasaida1,
+        entrada: horaentrada1,
+        saida1: horasaida2,
+        entrada1: horaentrada2,
+        pontoSaida: pontoSaida,
+        pontoEntrada: pontoEntrada,
+        pontoSaida1: pontoSaida1,
+        pontoEntrada1: pontoEntrada1);
 
     if (month == ponto.created.month)
       return Container(
@@ -88,7 +103,8 @@ class ReportMonth extends StatelessWidget {
                         ),
                         RichText(
                           text: TextSpan(
-                            text: 'Trabalhado: ${ponto.time}',
+                            text:
+                                'Trabalhado: ${cargaHorariaDiaria(saida: horasaida1, entrada: horaentrada1, saida1: horasaida2, entrada1: horaentrada2, pontoSaida: 1200, pontoEntrada: 800, pontoSaida1: 1800, pontoEntrada1: 1400)}',
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
@@ -159,6 +175,10 @@ class ReportMonth extends StatelessWidget {
     else if (cargaHorariaDiaria > cargaHoraria) {
       return cargaProrrogada = cargaHorariaDiaria - cargaHoraria;
     }
-    return 0;
+    return cargaProrrogada;
   }
 }
+/*
+'Trabalhado: ${cargaHorariaDiaria(saida: horasaida1, entrada: horaentrada1, saida1: horasaida2, entrada1: horaentrada2, pontoSaida: 1200, pontoEntrada: 800, pontoSaida1: 1800, pontoEntrada1: 1400)}',
+
+*/
