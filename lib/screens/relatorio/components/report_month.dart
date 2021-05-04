@@ -110,7 +110,9 @@ class ReportMonth extends StatelessWidget {
                                   text: '\n',
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(text: ' extra: 01:00'),
+                              TextSpan(
+                                  text:
+                                      ' extra: ${teste == teste ? 0 : teste}'),
                             ],
                           ),
                         ),
