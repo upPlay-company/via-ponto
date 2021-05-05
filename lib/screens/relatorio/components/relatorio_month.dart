@@ -56,7 +56,7 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
                   ),
                 );
               },
-              itemCount: month.first,
+              itemCount: month.length,
               scrollDirection: Axis.horizontal,
             ),
           ),

@@ -47,93 +47,108 @@ class ReportMonth extends StatelessWidget {
     int pontoEntrada;
     int pontoSaida1;
     int pontoEntrada1;
+    double cargaProrrogada;
+    double cargaHorariaManha = (((horasaida1 - horaentrada1) / 100) * 60);
+    double cargaHorariaTarde = (((horasaida2 - horaentrada2) / 100) * 60);
+    double cargaHoraMax = cargaHorariaManha + cargaHorariaTarde;
 
     if (month == ponto.created.month &&
         ponto.registro == "1ª Entrada" &&
         ponto.created.day == ponto.created.day) {
       pontoEntrada = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
-    } else if (month == ponto.created.month &&
+    }
+    if (month == ponto.created.month &&
         ponto.registro == "2ª Entrada" &&
         ponto.created.day == ponto.created.day) {
       pontoEntrada1 = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
-    } else if (month == ponto.created.month &&
+    }
+    if (month == ponto.created.month &&
         ponto.registro == "1ª Saída" &&
         ponto.created.day == ponto.created.day) {
       pontoSaida = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
-    } else if (month == ponto.created.month &&
+    }
+    if (month == ponto.created.month &&
         ponto.registro == "2ª Saída" &&
         ponto.created.day == ponto.created.day) {
       pontoSaida1 = int.parse(ponto.time.replaceAll(new RegExp(':'), ''));
     }
 
-    double teste = cargaHorariaDiaria(
+    double cargaHoraria = cargaHorariaDiaria(
         saida: horasaida1,
         entrada: horaentrada1,
         saida1: horasaida2,
         entrada1: horaentrada2,
-        pontoSaida: pontoSaida,
-        pontoEntrada: pontoEntrada,
-        pontoSaida1: pontoSaida1,
-        pontoEntrada1: pontoEntrada1);
+        pontoSaida: pontoSaida ?? 0,
+        pontoEntrada: pontoEntrada ?? 0,
+        pontoSaida1: pontoSaida1 ?? 0,
+        pontoEntrada1: pontoEntrada1 ?? 0);
 
-    if (month == ponto.created.month)
-      return Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
+    if (cargaHoraria != null) {
+      if (month == ponto.created.month) {
+        if (cargaHoraria > cargaHoraMax)
+          cargaProrrogada = cargaHoraria - cargaHoraMax;
+
+        print("carga Prorrogada: $cargaProrrogada");
+        return Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                            ),
+                            child: Text(
+                              '${ponto.created.day}/${ponto.created.month}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          child: Text(
-                            '${ponto.created.day}/${ponto.created.month}',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                          SizedBox(
+                            width: 30,
                           ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Trabalhado: ${teste / 60}',
-                            style: DefaultTextStyle.of(context).style,
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '\n',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(
-                                  text:
-                                      ' extra: ${teste == teste ? 0 : teste}'),
-                            ],
+                          RichText(
+                            text: TextSpan(
+                              text:
+                                  'Trabalhado: ${((cargaHoraria - cargaProrrogada) / 60).toStringAsPrecision(2)}',
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: '\n',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                    text:
+                                        ' extra: ${(cargaProrrogada / 60).toStringAsPrecision(2) == null ? 0 : (cargaProrrogada / 60).toStringAsPrecision(2)}'),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                      ],
+                          SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.black.withAlpha(50)))),
-            ),
-          ],
-        ),
-      );
-    else
+              Container(
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(color: Colors.black.withAlpha(50)))),
+              ),
+            ],
+          ),
+        );
+      } else
+        return Container();
+    } else
       return Container();
   }
 
@@ -152,11 +167,10 @@ class ReportMonth extends StatelessWidget {
   } // segunda entrada do funcionario no trabalho
       ) {
     //Declarações de variaveis processamento matematico
-    // calculo de conversão da carga horaria em minutos
+    // calculo de conversão da carga horaria em minutos de trabalho do funcionario
     double cargaHorariaManha = (((saida - entrada) / 100) * 60);
     double cargaHorariaTarde = (((saida1 - entrada1) / 100) * 60);
     double cargaHoraria = cargaHorariaManha + cargaHorariaTarde;
-
     //Variavel para retorna o calculo das horas extras
     double cargaProrrogada;
     //Calculo para retorna a carga horaria que o funcionario cumpri no dia
