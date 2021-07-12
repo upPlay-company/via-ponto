@@ -1,0 +1,49 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'my_turno_store.dart';
+
+// **************************************************************************
+// StoreGenerator
+// **************************************************************************
+
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+
+mixin _$MyTurnoStore on _MyTurnoStore, Store {
+  final _$allAdsAtom = Atom(name: '_MyTurnoStore.allAds');
+
+  @override
+  List<Turno> get allAds {
+    _$allAdsAtom.reportRead();
+    return super.allAds;
+  }
+
+  @override
+  set allAds(List<Turno> value) {
+    _$allAdsAtom.reportWrite(value, super.allAds, () {
+      super.allAds = value;
+    });
+  }
+
+  final _$loadingAtom = Atom(name: '_MyTurnoStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+allAds: ${allAds},
+loading: ${loading}
+    ''';
+  }
+}

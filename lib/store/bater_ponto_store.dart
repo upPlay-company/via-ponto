@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
 import 'package:viaponto_oficial/repository/bater_ponto_repository.dart';
+import 'package:viaponto_oficial/store/my_turno_store.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 
 part 'bater_ponto_store.g.dart';
@@ -9,6 +10,8 @@ class BaterPontoStore = _BaterPontoStore with _$BaterPontoStore;
 
 abstract class _BaterPontoStore with Store {
   final MyPontoStore store = MyPontoStore();
+
+  final MyTurnoStore myTurnoStore = MyTurnoStore();
 
   _BaterPontoStore({this.ponto}) {
     location = ponto.localization;
@@ -37,13 +40,10 @@ abstract class _BaterPontoStore with Store {
   @action
   Future<void> _send() async {
     ponto.localization = location;
-    try {
       loading = true;
-      await BaterPontoRepository().save(ponto, store);
+      await BaterPontoRepository().save(ponto, myTurnoStore);
       savedAd = true;
       loading = false;
-    } catch (e) {
-      error = e;
-    }
+
   }
 }

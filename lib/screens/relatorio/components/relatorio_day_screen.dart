@@ -75,19 +75,9 @@ class _RelatorioDayScreenState extends State<RelatorioDayScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('HORAS TOTAIS'),
+                      Text('RELATÓRIO DIÁRIOS'),
                       SizedBox(height: 10),
-                      Text('08:00')
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('HORAS EXTRAS'),
-                      SizedBox(height: 10),
-                      Text('01:00')
+                      Text('COMPROVANTE EM PDF')
                     ],
                   ),
                 ),

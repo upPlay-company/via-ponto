@@ -1,4 +1,5 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:viaponto_oficial/model/bater_ponto/departament.dart';
 import 'package:viaponto_oficial/model/empresas/empresas.dart';
 import 'package:viaponto_oficial/model/users/user.dart';
 import 'package:viaponto_oficial/repository/parse_errors.dart';
@@ -21,6 +22,7 @@ class UserRepository {
   Future<User> currentUser() async {
     final parseUser = await ParseUser.currentUser();
     print(parseUser);
+
     if (parseUser != null) {
       final response =
       await ParseUser.getCurrentUserFromServer(parseUser.sessionToken);
@@ -97,25 +99,12 @@ class UserRepository {
       name: parseUser.get(keyUserName),
       email: parseUser.get(keyUserEmail),
       phone: parseUser.get(keyUserPhone),
-      cargo: parseUser.get(keyUserCargo),
       cpf: parseUser.get(keyUserCpf),
       dataNasc: parseUser.get(keyUserNasc),
-      departamento: parseUser.get(keyUserDepatarmento),
+      departamento: Departament.fromParse(parseUser.get(keyUserDepatarmento)),
       idEmpresa: Empresas.fromParse(parseUser.get(keyUserIdEmpresa)),
-      nomeEmpresa: parseUser.get(keyUserNomeEmpresa),
       userName: parseUser.get(keyUserUserName),
-      semanaEntrada1: parseUser.get(keyUserHoraEntrada1),
-      semanaEntrada2: parseUser.get(keyUserHoraEntrada2),
-      semanaSaida1: parseUser.get(keyUserHoraSaida1),
-      semanaSaida2: parseUser.get(keyUserHoraSaida2),
-      sabadoEntrada1: parseUser.get(keyUserHoraSabadoEntrada1),
-      sabadoEntrada2: parseUser.get(keyUserHoraSabadoEntrada2),
-      sabadoSaida1: parseUser.get(keyUserHoraSabadoSaida1),
-      sabadoSaida2: parseUser.get(keyUserHoraSabadoSaida2),
-      domingoEntrada1: parseUser.get(keyUserHoraDomingoEntrada1),
-      domingoEntrada2: parseUser.get(keyUserHoraDomingoEntrada2),
-      domingoSaida1: parseUser.get(keyUserHoraDomingoSaida1),
-      domingoSaida2: parseUser.get(keyUserHoraDomingoSaida2),
+      demitido: parseUser.get(keyUserDemitido),
       createdAt: parseUser.get(keyUserCreatedAt),
     );
   }

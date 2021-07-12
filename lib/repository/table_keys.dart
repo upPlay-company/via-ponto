@@ -1,3 +1,4 @@
+const keyUserTable = 'User';
 const keyUserId = 'objectId';
 const keyUserName = 'nome';
 const keyUserUserName = 'username';
@@ -6,22 +7,9 @@ const keyUserPhone = 'celular';
 const keyUserIdEmpresa = 'id_empresa';
 const keyUserCelular = 'celular';
 const keyUserCpf = 'cpf';
-const keyUserDepatarmento = 'departamento';
+const keyUserDepatarmento = 'id_departamento';
 const keyUserNasc = 'data_nasc';
-const keyUserCargo = 'cargo';
-const keyUserNomeEmpresa = 'nome_empresa';
-const keyUserHoraEntrada1 = 'hora_semana_entrada_1';
-const keyUserHoraEntrada2 = 'hora_semana_entrada_2';
-const keyUserHoraSaida1 = 'hora_semana_saida_1';
-const keyUserHoraSaida2 = 'hora_semana_saida_2';
-const keyUserHoraSabadoEntrada1 = 'hora_sabado_entrada_1';
-const keyUserHoraSabadoEntrada2 = 'hora_sabado_entrada_2';
-const keyUserHoraSabadoSaida1 = 'hora_sabado_saida_1';
-const keyUserHoraSabadoSaida2 = 'hora_sabado_saida_2';
-const keyUserHoraDomingoEntrada1 = 'hora_domingo_entrada_1';
-const keyUserHoraDomingoEntrada2 = 'hora_domingo_entrada_2';
-const keyUserHoraDomingoSaida1 = 'hora_domingo_saida_1';
-const keyUserHoraDomingoSaida2 = 'hora_domingo_saida_2';
+const keyUserDemitido = 'demitido';
 const keyUserCreatedAt = 'createdAt';
 
 const keyEmpresaTable = 'Empresa';
@@ -49,7 +37,28 @@ const keyPontoIdUser = 'id_funcionario';
 const keyPontoLocal = 'local_registro';
 const keyPontoQuantity = 'quantidade';
 const keyPontoRegistro = 'registro';
+const keyPontoDate = 'data';
+const keyPontoDiaSemana = 'dia_da_semana';
 const keyPontoAt = 'createdAt';
+
+const keyTurnoTable = 'Turno';
+const keyTurnoId = 'objectId';
+const keyTurnoPrimeiraEntrada = 'primeira_entrada';
+const keyTurnoPrimeiraSaida = 'primeira_saida';
+const keyTurnoSegundaEntrada = 'segunda_entrada';
+const keyTurnoSegundaSaida = 'segunda_saida';
+const keyTurnoEmpresa = 'id_empresa';
+const keyTurnoDepartamento = 'id_departamento';
+const keyTurnoNomeDepartamento = 'nome';
+const keyTurnoDiaSemana = 'dia_da_semana';
+const keyTurnoIdDepartament = 'departamento';
+const keyTurnoAt = 'createdAt';
+
+const keyTableDepartament = 'Departamento';
+const keyDepartamentId = 'objectId';
+const keyDepartamentNome = 'nome';
+const keyDepartamentEmpresa = 'id_empresa';
+
 
 
 

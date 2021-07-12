@@ -95,12 +95,12 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
           if (store.allAds.isEmpty) Container();
 
           final List<Widget> children = store.allAds.map<Widget>((section) {
-            return ReportMonth(
-              ponto: section,
-              store: store,
-              date: _selectedValue,
-              month: monthIndex,
-            );
+            // return ReportMonth(
+            //   ponto: section,
+            //   store: store,
+            //   month: monthIndex,
+            //   date: _selectedValue,
+            // );
           }).toList();
 
           return SliverList(

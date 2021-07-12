@@ -97,11 +97,6 @@ class _HomeScreenState extends State<HomeScreen>
                       Text(userManagerStore.user.name,
                           style: TextStyle(color: Colors.white)),
                       SizedBox(
-                        height: 5,
-                      ),
-                      Text('Empresa: ${userManagerStore.user.nomeEmpresa}',
-                          style: TextStyle(color: Colors.white, fontSize: 12)),
-                      SizedBox(
                         height: 20,
                       ),
                       DigitalClock(
