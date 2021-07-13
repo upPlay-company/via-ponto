@@ -55,78 +55,76 @@ class BaterPontoRepository {
 
       int horaAtual = int.parse(formatTime);
 
-      print(myTurnoStore.allAds[5].primeiraEntrada);
-
-      if(userManagerStore.user.idEmpresa.id == myTurnoStore.allAds[0].empresas.id){
+      if (userManagerStore.user.idEmpresa.id ==
+          myTurnoStore.allAds[0].empresas.id) {
         if (semana == 'sabado') {
-          // sabadoEntrada1 = myTurnoStore.allAds[5].primeiraEntrada
-          //     .replaceAll(new RegExp(':'), '');
-          // sabadoEntrada2 = myTurnoStore.allAds[5].sabadoEntrada2
-          //     .replaceAll(new RegExp(':'), '');
-          // sabadoSaida1 =
-          //     userManagerStore.user.sabadoSaida1.replaceAll(new RegExp(':'), '');
-          // sabadoSaida2 =
-          //     userManagerStore.user.sabadoSaida2.replaceAll(new RegExp(':'), '');
-          // int sabadoentrada1 = int.parse(sabadoEntrada1);
-          // int sabadoentrada2 = int.parse(sabadoEntrada2);
-          // int sabadosaida1 = int.parse(sabadoSaida1);
-          // int sabadosaida2 = int.parse(sabadoSaida2);
-          //
-          // int hora1saida30antes = sabadosaida1 - 0070;
-          // int hora2saida30antes = sabadosaida2 - 0070;
-          //
-          // if (horaAtual <= sabadoentrada1 ||
-          //     horaAtual >= sabadoentrada1 && horaAtual < hora1saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
-          // } else if (horaAtual >= hora1saida30antes &&
-          //     horaAtual < sabadoentrada2) {
-          //   PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
-          // } else if (horaAtual >= sabadoentrada2 &&
-          //     horaAtual < hora2saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
-          // } else if (horaAtual >= hora2saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
-          // }
+
+            sabadoEntrada1 = myTurnoStore.allAds[5].primeiraEntrada
+                .replaceAll(new RegExp(':'), '');
+            sabadoSaida1 = myTurnoStore.allAds[5].primeiraSaida
+                .replaceAll(new RegExp(':'), '');
+            sabadoEntrada2 = myTurnoStore.allAds[5].segundaEntrada
+                .replaceAll(new RegExp(':'), '');
+            sabadoSaida2 = myTurnoStore.allAds[5].segundaSaida
+                .replaceAll(new RegExp(':'), '');
+
+          int sabadoentrada1 = sabadoEntrada1 == 'nao definido' ? 0000 : int.parse(sabadoEntrada1);
+          int sabadoentrada2 = sabadoEntrada2 == 'nao definido' ? 0000 : int.parse(sabadoEntrada2);
+          int sabadosaida1 = sabadoSaida1 == 'nao definido' ? 0000 : int.parse(sabadoSaida1) ;
+          int sabadosaida2 = sabadoSaida2 == 'nao definido' ? 0000 : int.parse(sabadoSaida2) ;
+
+          int hora1saida30antes = sabadosaida1 - 0070;
+          int hora2saida30antes = sabadosaida2 - 0070;
+
+          if (horaAtual <= sabadoentrada1 ||
+              horaAtual >= sabadoentrada1 && horaAtual < hora1saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+          } else if (horaAtual >= hora1saida30antes &&
+              horaAtual < sabadoentrada2) {
+            PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+          } else if (horaAtual >= sabadoentrada2 &&
+              horaAtual < hora2saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+          } else if (horaAtual >= hora2saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+          }
         } else if (semana == 'domingo') {
-          // domingo
-          // domingoEntrada1 = userManagerStore.user.semanaEntrada1
-          //     .replaceAll(new RegExp(':'), '');
-          // domingoEntrada2 = userManagerStore.user.semanaEntrada2
-          //     .replaceAll(new RegExp(':'), '');
-          // domingoSaida1 =
-          //     userManagerStore.user.semanaSaida1.replaceAll(new RegExp(':'), '');
-          // domingoSaida2 =
-          //     userManagerStore.user.semanaSaida2.replaceAll(new RegExp(':'), '');
-          // int domingoentrada1 = int.parse(domingoEntrada1);
-          // int domingoentrada2 = int.parse(domingoEntrada2);
-          // int domingosaida1 = int.parse(domingoSaida1);
-          // int domingosaida2 = int.parse(domingoSaida2);
-          //
-          // int hora1saida30antes = domingosaida1 - 0070;
-          // int hora2saida30antes = domingosaida2 - 0070;
-          //
-          // if (horaAtual <= domingoentrada1 ||
-          //     horaAtual >= domingoentrada1 && horaAtual < hora1saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
-          // } else if (horaAtual >= hora1saida30antes &&
-          //     horaAtual < domingoentrada2) {
-          //   PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
-          // } else if (horaAtual >= domingoentrada2 &&
-          //     horaAtual < hora2saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
-          // } else if (horaAtual >= hora2saida30antes) {
-          //   PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
-          // }
+
+            domingoEntrada1 = myTurnoStore.allAds[6].primeiraEntrada.replaceAll(new RegExp(':'), '');
+            domingoSaida1 = myTurnoStore.allAds[6].primeiraSaida.replaceAll(new RegExp(':'), '');
+            domingoEntrada2 = myTurnoStore.allAds[6].segundaEntrada.replaceAll(new RegExp(':'), '');
+            domingoSaida2 = myTurnoStore.allAds[6].segundaSaida.replaceAll(new RegExp(':'), '');
+
+          int domingoentrada1 = domingoEntrada1 == 'nao definido' ? 0000 : int.parse(domingoEntrada1);
+          int domingoentrada2 = domingoEntrada2 == 'nao definido' ? 0000 : int.parse(domingoEntrada2);
+          int domingosaida1 = domingoSaida1 == 'nao definido' ? 0000 : int.parse(domingoSaida1);
+          int domingosaida2 = domingoSaida2 == 'nao definido' ? 0000 : int.parse(domingoSaida2);
+
+          int hora1saida30antes = domingosaida1 - 0070;
+          int hora2saida30antes = domingosaida2 - 0070;
+
+          if (horaAtual <= domingoentrada1 ||
+              horaAtual >= domingoentrada1 && horaAtual < hora1saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
+          } else if (horaAtual >= hora1saida30antes &&
+              horaAtual < domingoentrada2) {
+            PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
+          } else if (horaAtual >= domingoentrada2 &&
+              horaAtual < hora2saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
+          } else if (horaAtual >= hora2saida30antes) {
+            PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
+          }
         } else {
           // segunda a sexta
           semanaEntrada1 = myTurnoStore.allAds[0].primeiraEntrada
               .replaceAll(new RegExp(':'), '');
           semanaEntrada2 = myTurnoStore.allAds[0].segundaEntrada
               .replaceAll(new RegExp(':'), '');
-          semanaSaida1 =
-              myTurnoStore.allAds[0].primeiraSaida.replaceAll(new RegExp(':'), '');
-          semanaSaida2 =
-              myTurnoStore.allAds[0].segundaEntrada.replaceAll(new RegExp(':'), '');
+          semanaSaida1 = myTurnoStore.allAds[0].primeiraSaida
+              .replaceAll(new RegExp(':'), '');
+          semanaSaida2 = myTurnoStore.allAds[0].segundaEntrada
+              .replaceAll(new RegExp(':'), '');
           int horaentrada1 = int.parse(semanaEntrada1);
           int horaentrada2 = int.parse(semanaEntrada2);
           int horasaida1 = int.parse(semanaSaida1);
@@ -138,9 +136,11 @@ class BaterPontoRepository {
           if (horaAtual <= horaentrada1 ||
               horaAtual >= horaentrada1 && horaAtual < hora1saida30antes) {
             PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
-          } else if (horaAtual >= hora1saida30antes && horaAtual < horaentrada2) {
+          } else if (horaAtual >= hora1saida30antes &&
+              horaAtual < horaentrada2) {
             PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
-          } else if (horaAtual >= horaentrada2 && horaAtual < hora2saida30antes) {
+          } else if (horaAtual >= horaentrada2 &&
+              horaAtual < hora2saida30antes) {
             PontoObject.set<String>(keyPontoRegistro, '2ª Entrada');
           } else if (horaAtual >= hora2saida30antes) {
             PontoObject.set<String>(keyPontoRegistro, '2ª Saída');
@@ -159,7 +159,7 @@ class BaterPontoRepository {
       if (!response.success) {
         return Future.error(ParseErrors.getDescription(response.error.code));
       }
-    }
+  }
 
   Future<List<BaterPonto>> getMyPonto(User user) async {
     final currentUser = ParseUser(user.userName, user.password, user.email)

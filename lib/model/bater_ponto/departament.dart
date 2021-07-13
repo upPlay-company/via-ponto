@@ -4,16 +4,12 @@ import 'package:viaponto_oficial/repository/table_keys.dart';
 
 class Departament {
 
-  Departament({this.id,
-    this.nome,
-    this.empresas
-  });
+  Departament.fromParse(ParseObject parseObject){
+    id = parseObject.objectId;
+    nome = parseObject.get<String>(keyDepartamentNome);
+  }
 
-  Departament.fromParse(ParseObject parseObject)
-      : id = parseObject.objectId,
-      nome = parseObject.get<String>(keyDepartamentNome),
-      empresas = Empresas.fromParse(parseObject.get<ParseObject>(keyDepartamentEmpresa));
-
+  Departament();
 
   String id;
   String nome;
