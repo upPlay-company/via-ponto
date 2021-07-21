@@ -32,7 +32,7 @@ class GeralHelper {
           title: Text(titulo),
           content: Text(mensagem),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("Fechar"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -55,13 +55,13 @@ class GeralHelper {
           title: Text(titulo),
           content: Text(mensagem),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(textoBotaoCancelar),
               onPressed: () {
                 Navigator.of(context).pop(ResultadoMensagemEnum.cancelar);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(textoBotaoOK),
               onPressed: () {
                 Navigator.of(context).pop(ResultadoMensagemEnum.ok);

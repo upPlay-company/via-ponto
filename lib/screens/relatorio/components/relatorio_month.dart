@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
-import 'package:viaponto_oficial/screens/relatorio/components/report_month.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 
 class RelatorioMonth extends StatefulWidget {
@@ -10,7 +8,7 @@ class RelatorioMonth extends StatefulWidget {
 }
 
 class _RelatorioMonthState extends State<RelatorioMonth> {
-  DateTime _selectedValue = DateTime.now();
+  // DateTime _selectedValue = DateTime.now();
   int monthIndex = DateTime.now().month;
 
   final MyPontoStore store = MyPontoStore();
@@ -90,24 +88,24 @@ class _RelatorioMonthState extends State<RelatorioMonth> {
           ),
         ],
       )),
-      Observer(
-        builder: (_) {
-          if (store.allAds.isEmpty) Container();
-
-          final List<Widget> children = store.allAds.map<Widget>((section) {
-            // return ReportMonth(
-            //   ponto: section,
-            //   store: store,
-            //   month: monthIndex,
-            //   date: _selectedValue,
-            // );
-          }).toList();
-
-          return SliverList(
-            delegate: SliverChildListDelegate(children),
-          );
-        },
-      )
+      // Observer(
+      //   builder: (_) {
+      //     if (store.allAds.isEmpty) Container();
+      //
+      //     final List<Widget> children = store.allAds.map<Widget>((section) {
+      //       return ReportMonth(
+      //         ponto: section,
+      //         store: store,
+      //         month: monthIndex,
+      //         date: _selectedValue,
+      //       );
+      //     }).toList();
+      //
+      //     return SliverList(
+      //       delegate: SliverChildListDelegate(children),
+      //     );
+      //   },
+      // )
     ]));
   }
 
