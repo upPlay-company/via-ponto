@@ -117,6 +117,7 @@ class BaterPontoRepository {
           }
         } else {
           // segunda a sexta
+          print('entrou');
           semanaEntrada1 = myTurnoStore.allAds[0].primeiraEntrada
               .replaceAll(new RegExp(':'), '');
           semanaEntrada2 = myTurnoStore.allAds[0].segundaEntrada
@@ -130,6 +131,8 @@ class BaterPontoRepository {
           int horasaida1 = int.parse(semanaSaida1);
           int horasaida2 = int.parse(semanaSaida2);
 
+          print(horasaida1);
+
           int hora1saida30antes = horasaida1 - 0070;
           int hora2saida30antes = horasaida2 - 0070;
 
@@ -138,6 +141,7 @@ class BaterPontoRepository {
             PontoObject.set<String>(keyPontoRegistro, '1ª Entrada');
           } else if (horaAtual >= hora1saida30antes &&
               horaAtual < horaentrada2) {
+            print('entrou saida');
             PontoObject.set<String>(keyPontoRegistro, '1ª Saída');
           } else if (horaAtual >= horaentrada2 &&
               horaAtual < hora2saida30antes) {
@@ -155,6 +159,8 @@ class BaterPontoRepository {
             ..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
 
       final response = await PontoObject.save();
+
+      print(response.statusCode);
 
       if (!response.success) {
         return Future.error(ParseErrors.getDescription(response.error.code));

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:location_permissions/location_permissions.dart';
 import 'package:mobx/mobx.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
+import 'package:viaponto_oficial/common/error_box.dart';
 import 'package:viaponto_oficial/helpers/geolocalizacaoHelper.dart';
 import 'package:viaponto_oficial/helpers/geralHelper.dart';
 import 'package:viaponto_oficial/model/bater_ponto/bater_ponto.dart';
@@ -217,7 +218,15 @@ class _BaterPontoScreenState extends State<BaterPontoScreen> {
                                 )
                               ],
                             ),
-                          )
+                          ),
+                        Observer(builder: (_) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: ErrorBox(
+                              message: store.error,
+                            ),
+                          );
+                        })
                       ],
                     );
                 }),

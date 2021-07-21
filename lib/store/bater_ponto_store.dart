@@ -41,8 +41,12 @@ abstract class _BaterPontoStore with Store {
   Future<void> _send() async {
     ponto.localization = location;
       loading = true;
-      await BaterPontoRepository().save(ponto, myTurnoStore);
-      savedAd = true;
+      try {
+        await BaterPontoRepository().save(ponto, myTurnoStore);
+        savedAd = true;
+      } catch (e){
+        error = e;
+      }
       loading = false;
 
   }
