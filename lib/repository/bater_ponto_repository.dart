@@ -57,7 +57,7 @@ class BaterPontoRepository {
 
       if (userManagerStore.user.idEmpresa.id ==
           myTurnoStore.allAds[0].empresas.id) {
-        if (semana == 'sabado') {
+        if (semana == 'sábado') {
 
             sabadoEntrada1 = myTurnoStore.allAds[5].primeiraEntrada
                 .replaceAll(new RegExp(':'), '');
@@ -152,11 +152,13 @@ class BaterPontoRepository {
         }
       }
 
-      PontoObject.set<int>(keyPontoQuantity, ponto.quantity);
+      PontoObject.set<int>(keyPontoQuantity, 0);
       PontoObject.set<ParseObject>(
           keyPontoIdEmpresa,
           ParseObject(keyEmpresaTable)
             ..set(keyEmpresaId, userManagerStore.user.idEmpresa.id));
+
+      print(ponto);
 
       final response = await PontoObject.save();
 

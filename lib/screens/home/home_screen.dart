@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:viaponto_oficial/screens/ponto/bater_ponto_screen.dart';
+import 'package:viaponto_oficial/store/my_turno_store.dart';
 import 'package:viaponto_oficial/store/myponto_store.dart';
 import 'package:viaponto_oficial/store/user_manager_store.dart';
 
@@ -19,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final MyPontoStore store = MyPontoStore();
 
+  final MyTurnoStore turno = MyTurnoStore();
+
   DateTime date = DateTime.now();
 
   int date1 = DateTime.now().hour;
@@ -27,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+
+    print(turno.allAds.length);
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(

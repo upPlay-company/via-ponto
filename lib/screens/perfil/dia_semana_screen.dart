@@ -11,7 +11,7 @@ class DiaSemanaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Color primary = Theme.of(context).primaryColor;
-  if(turno.diaSemana == 'segunda')
+  if(turno.diaSemana == 'segunda-feira')
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 16),
       child: Container(
@@ -25,7 +25,7 @@ class DiaSemanaScreen extends StatelessWidget {
             ],
           )),
     );
-  else if(turno.diaSemana == 'sabado')
+  else if(turno.diaSemana == 'sábado')
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 16),
       child: Container(
